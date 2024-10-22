@@ -1,0 +1,101 @@
+{% if events %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 pt-20 relative">
+                <div class="row g-4 justify-center">
+                    
+                    {% if location and location != 'None' %}
+                    <h1>Events in {{ location }}</h1>
+                    {% endif %}
+                    {% for event in events %}
+                    <div class="md:col-6 lg:col-4" data-aos="fade-up-sm" data-aos-delay="{{ loop.index0 * 100 }}">
+                        <div class="group relative min-h-full overflow-hidden rounded-lg border border-white/5 bg-theme-dark p-6 duration-300 hover:-translate-y-1">
+                            <div class="image-container mb-6">
+                                {% if event.get('external_links') and event['external_links'].get('image') %}
+                                <img src="{{ event['external_links']['image'] }}" 
+                                     alt="{{ event.get('title', 'No Title Available') }}" 
+                                     class="w-full h-[200px] object-cover rounded-t-lg"
+                                     onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/no-photo.png') }}';"
+                                     width="100%" height="200" />
+                                {% else %}
+                                <img src="{{ url_for('static', filename='images/no-photo.png') }}" 
+                                     alt="{{ event.get('title', 'No Title Available') }}" 
+                                     class="w-full h-[200px] object-cover rounded-t-lg"
+                                     width="100%" height="200" />
+                                {% endif %}
+                            </div>
+
+                            <!-- Event Details -->
+                            <div class="relative z-20">
+                                <!-- Event Title -->
+                                <h3 class="tracking-none mb-1 text-xl/snug font-semibold">{{ event.get('title', 'No Title Available') }}</h3>
+                                
+                                <!-- Event Category -->
+                                {% if event.category and event.category != "N/A" %}
+                                <p class="tracking-none mt-0 opacity-70">{{ event.category }}</p>
+                                {% endif %}
+                                
+                                <!-- Event Description -->
+                                {% if event.description and event.description != "N/A" %}
+                                <p class="opacity-80 mt-4">&#8226; {{ event.description }}</p>
+                                {% endif %}
+                                 <!-- Event Date -->
+                                 {% if event.date and event.date.start_date and event.date.end_date %}
+                                 <p class="opacity-80 mt-4">&#8226; Date: {{ event.date.start_date | format_datetime }} - {{ event.date.end_date | format_datetime }}</p>
+                                 {% endif %}
+ 
+                                 <!-- Event Location -->
+                                 {% if event.location and event.location.venue and event.location.venue != "N/A" %}
+                                 <p class="opacity-80 mt-4">&#8226; Location: {{ event.location.venue }}
+                                     {% if event.location.city and event.location.city != "N/A" %}, {{ event.location.city }}{% endif %}
+                                     {% if event.location.country and event.location.country != "N/A" %}, {{ event.location.country }}{% endif %}
+                                 </p>
+                                 {% endif %}
+
+                                <!-- View Details Button -->
+                                <a class="btn btn-inline mt-8 has-icon" href="{{ url_for('event_detail', event_id=event['_id']) }}" target="_blank">
+                                    <span class="value">
+                                        <span data-content="View Details">View Details</span>
+                                    </span>
+                                    <span class="icon">
+                                        <span>
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" class="text-xs" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5 12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                                            </svg>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="pointer-events-none absolute bottom-[-22%] right-[-40%] h-[180px] w-[335px] rotate-[-20deg] from-dark/0 to-secondary opacity-0 blur-[83px] transition-opacity duration-300 bg-gradient-[260deg] group-hover:opacity-100"></div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    <div aria-hidden="true" class="rotate-animation pointer-events-none absolute -right-10 top-0 -z-10 h-80 w-[550px] -translate-x-2/4 rounded-full from-secondary via-secondary/80 via-60% to-dark/0 opacity-30 blur-[120px] bg-gradient-[260deg]"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 pt-20 relative">
+                <div class="row g-4 justify-center">
+                    
+                    {% if location and location != 'None' %}
+                    <h1>Events in {{ location }}</h1>
+                    {% endif %}
+                    
+                    <h3 class="tracking-none mb-1 text-xl/snug font-semibold">We're sorry, but there are currently no events available in {{ location }}. Please check back later for updates.</h3>
+                    
+                    <div aria-hidden="true" class="rotate-animation pointer-events-none absolute -right-10 top-0 -z-10 h-80 w-[550px] -translate-x-2/4 rounded-full from-secondary via-secondary/80 via-60% to-dark/0 opacity-30 blur-[120px] bg-gradient-[260deg]"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

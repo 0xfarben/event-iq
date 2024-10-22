@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en" data-bs-theme="blue-theme">
+
+<head>
+  <link rel="icon" href="{{ url_for('static', filename='images/dash/favicon.png') }}" type="image/png">
+
+  <link href="{{ url_for('static', filename='css/dash/pace.min.css') }}" rel="stylesheet">
+  <script src="{{ url_for('static', filename='js/dash/pace.min.js') }}">
+  </script>
+  <link href="{{ url_for('static', filename='plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/metismenu/metisMenu.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/metismenu/mm-vertical.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/simplebar/css/simplebar.css') }}">
+
+  <link href="{{ url_for('static', filename='css/dash/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+
+  <link href="{{ url_for('static', filename='css/dash/bootstrap-extended.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/main.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/horizontal-menu.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/dark-theme.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/blue-theme.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/semi-dark.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/bordered-theme.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/responsive.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="top-header">
+  <nav class="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
+    <div class="logo-header d-none d-xl-flex align-items-center gap-2">
+      <div class="logo-icon">
+        <img src="{{ url_for('static', filename='images/favicon.png') }}" class="logo-img" width="45" alt="">
+      </div>
+      <div class="logo-name">
+        <h5 class="mb-0">Event IQ</h5>
+      </div>
+    </div>
+    <div class="btn-toggle d-xl-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+      <a href="javascript:;"><i class="material-icons-outlined">menu</i></a>
+    </div>
+    
+    <ul class="navbar-nav gap-1 nav-right-links align-items-center">
+    
+    </ul>
+
+  </nav>
+</header>
+
+<div class="primary-menu">
+  <nav class="navbar navbar-expand-xl align-items-center">
+   <div class="offcanvas offcanvas-start w-260" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+   <div class="offcanvas-header border-bottom h-70">
+     <div class="d-flex align-items-center gap-2">
+       <div class="">
+         <img src="assets/images/logo-icon.png" class="logo-icon" width="45" alt="logo icon">
+       </div>
+       <div class="">
+         <h4 class="logo-text">Event IQ</h4>
+       </div>
+     </div>
+     <a href="#" class="primaery-menu-close" data-bs-dismiss="offcanvas">
+      <i class="material-icons-outlined">close</i>
+     </a>
+   </div>
+   
+   </div>
+ </nav>
+</div>
+<!--end navigation-->
+
+
+  <!--start main wrapper-->
+  <main class="main-wrapper">
+    <div class="main-content">
+      <!--breadcrumb-->
+				
+				<!--end breadcrumb-->
+        <div class="row">
+					<div class="col-xl-12 mx-auto">
+
+						<div class="form-container">
+              <h2 class="mb-0 text-uppercase">Enter Your Interests</h2>
+          </div>
+						<hr>
+						<div class="card">
+							<div class="card-body">
+							
+                  <form action="{{ url_for('save_interests') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Example - Web3,  AI, Data Science, Web Development, Blockchain, etc.</label>
+                        <label class="form-label">To save a keyword, please press Enter or use a comma</label>
+
+                       
+                        <input type="text" name="interests" class="form-control" data-role="tagsinput" 
+                        placeholder="Type your interests.." style="width: 100%;" />
+                    </div>
+                    </div>
+                    
+                    <div class="buttons-container">
+                        <button type="submit">Save Interests</button>
+                        <a href="{{ url_for('dashboard') }}" class="skip">Skip</a>
+                    </div>
+                </form>
+          
+              </form>
+          
+								
+							</div>
+						</div>
+						
+						
+					</div>
+				</div>
+				<!--end row-->
+    </div>
+    <script>
+      $('input[data-role="tagsinput"]').tagsinput();
+    </script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+<style>
+  .bootstrap-tagsinput {
+      width: 100%;
+      min-height: 45px;
+      background-color: #333; 
+      color: white; 
+      padding: 10px; 
+      border-radius: 10px; 
+      border: 1px solid #ccc;
+  }
+
+  .bootstrap-tagsinput input {
+      color: white !important;
+      background-color: transparent;
+      width: auto;
+      min-width: 200px;
+  }
+
+  .bootstrap-tagsinput .tag {
+      background-color: #007bff;
+      color: white;
+      border-radius: 25px; 
+      padding: 5px 10px; 
+      font-size: 16px; 
+      margin-right: 5px;
+      display: inline-block;
+  }
+
+  .bootstrap-tagsinput .tag [data-role="remove"] {
+      margin-left: 8px;
+      color: white;
+      cursor: pointer;
+  }
+
+  .bootstrap-tagsinput input:focus {
+      outline: none;
+      border-color: #007bff;
+  }
+</style>
+  
+
+
+  </main>
+
+  <style>
+    .form-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+     .buttons-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 10px auto;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        
+        .skip {
+            display: block;
+            margin: 10px auto;
+            color: #007bff;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .skip:hover {
+            text-decoration: underline;
+        }
+    .form-check1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin: 10px;
+    }
+
+    .form-check-input1 {
+        transform: scale(1.5);
+        margin-right: 10px;
+    }
+
+    .form-check-label1 {
+        font-size: 18px;
+    }
+</style>
+
+<script src="{{ url_for('static', filename='js/dash/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dash/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/metismenu/metisMenu.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/apexchart/apexcharts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/simplebar/js/simplebar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/peity/jquery.peity.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dash/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dash/dashboard1.js') }}"></script>
+</body>
+</html>

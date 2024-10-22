@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en" data-bs-theme="blue-theme">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event IQ | User Dashboard</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/dash/favicon.png') }}" type="image/png">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+  <link href="{{ url_for('static', filename='css/dash/pace.min.css') }}" rel="stylesheet">
+  <script src="{{ url_for('static', filename='js/dash/pace.min.js') }}">
+  </script>
+  <link href="{{ url_for('static', filename='plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/metismenu/metisMenu.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/metismenu/mm-vertical.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/simplebar/css/simplebar.css') }}">
+  <link href="{{ url_for('static', filename='css/dash/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/bootstrap-extended.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/main.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/horizontal-menu.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/dark-theme.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/blue-theme.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/semi-dark.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/bordered-theme.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/responsive.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+ <header class="top-header">
+  <nav class="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
+    <a href="{{ url_for('home') }}" class="text-decoration-none">
+      <div class="logo-header d-none d-xl-flex align-items-center gap-2">
+        <div class="logo-icon">
+          <img src="{{ url_for('static', filename='images/favicon.png') }}" class="logo-img" width="45" alt="">
+        </div>
+        <div class="logo-name">
+          <h5 class="mb-0">Event IQ</h5>
+        </div>
+      </div>
+    </a>
+
+    <div class="btn-toggle d-xl-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+      <a href="javascript:;"><i class="material-icons-outlined">menu</i></a>
+    </div>
+
+    <ul class="navbar-nav gap-1 nav-right-links align-items-center">
+
+      <li class="nav-item dropdown">
+        <a href="javascript:;" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+          <!-- Check if it's a Firebase user (URL) or a MongoDB user (base64 image) -->
+          {% if is_firebase %}
+            <img src="{{ profile_image }}" class="rounded-circle p-1 border" width="45" height="45" alt="Profile Image">
+          {% else %}
+            <img src="data:image/png;base64,{{ profile_image }}" class="rounded-circle p-1 border" width="45" height="45" alt="Profile Image">
+          {% endif %}
+        </a>
+        <div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
+          <a class="dropdown-item gap-2 py-2" href="javascript:;">
+            <div class="text-center">
+              {% if is_firebase %}
+                <img src="{{ profile_image }}" class="rounded-circle p-1 shadow mb-3" width="90" height="90" alt="Profile Image">
+              {% else %}
+                <img src="data:image/png;base64,{{ profile_image }}" class="rounded-circle p-1 shadow mb-3" width="90" height="90" alt="Profile Image">
+              {% endif %}
+              <h5 class="user-name mb-0 fw-bold">Hello, {{ user['name'] }}</h5>
+            </div>
+          </a>
+          <hr class="dropdown-divider">
+          <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ url_for('logout') }}">
+            <i class="material-icons-outlined">power_settings_new</i>Logout
+          </a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+  <!--end top header-->
+
+
+<!--navigation-->
+<div class="primary-menu">
+  <nav class="navbar navbar-expand-xl align-items-center">
+   <div class="offcanvas offcanvas-start w-260" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+   
+    <div class="offcanvas-body p-0">
+     
+
+    <div class="card">
+        <br>
+        <!-- <div class="card-body"> -->
+            <div class="row row-cols-auto g-3">
+              
+                <!-- Profile Button -->
+                <div class="col">
+                    <button type="button" class="btn btn-grd btn-grd-primary px-5 d-flex flex-column align-items-center"
+                    onclick="window.location.href='{{ url_for('dashboard') }}'">
+                        <i class="material-icons-outlined">account_circle</i>
+                        <span>Profile</span>
+                    </button>
+                </div>
+    
+                <!-- Info Button -->
+                <div class="col">
+                    <button type="button" class="btn btn-grd btn-grd-info px-5 d-flex flex-column align-items-center"
+                    onclick="window.location.href='{{ url_for('event_registered') }}'">
+                        <i class="material-icons-outlined">calendar_today</i>
+                        <span>Event Registered</span>
+                    </button>
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>
+    
+   </div>
+
+   </div>
+ </nav>
+</div>
+<!--end navigation-->
+<br>
+<br>
+<br>
+  <!--start main wrapper-->
+  <main class="main-wrapper">
+    <div class="main-content">
+      <!--breadcrumb-->
+      <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Total Events Registered</div>
+       
+      </div>
+      <!--end breadcrumb-->
+
+
+    
+      {% if events %}
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="product-table">
+            <div class="table-responsive white-space-nowrap">
+              <table class="table align-middle">
+                <thead class="table-light">
+                  <tr>
+                    
+                    <th>Event Name</th>
+                    
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Available Tickets</th>
+                  
+                    <th>Event Link</th>
+                    <th>Maps</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for event in events %}
+                  <tr>
+                    
+                    <td>
+                      <div class="d-flex align-items-center gap-3">
+                        <div class="product-box">
+                          <img src="assets/images/orders/01.png" width="70" class="rounded-3" alt="">
+                        </div>
+                        <div class="product-info">
+                          <a href="javascript:;" class="product-title">{{ event.title }}</a>
+                         
+                        </div>
+                      </div>
+                    </td>
+                   
+                    <td>{{ event.category }}</td>
+                    <td>{{ event.date.start_date }} - {{ event.date.end_date }}</td>
+                    <td>
+                      <div class="product-tags">
+                        <a href="javascript:;" class="btn-tags">{{ event.location.city }}, {{ event.location.country }} ({{ event.location.venue }})</a>
+                        
+                    </div>
+                    </td>
+                    <td>
+                      <div class="product-rating">
+                       
+                        <i class="bi bi-star-fill text-warning me-2"></i><span>{{ event.available_tickets }}</span>
+                        
+                      </div>
+                    </td>
+                    <td>
+                      <a href="{{ event.external_links.registration }}">Event Link</a>
+                      
+                    </td>
+                    <td>
+                      {% if event.location.venue == 'Online event' or event.location.venue == 'N/A' or event.location.venue == 'Virtual' %}
+                          <span>Online</span>
+                      {% else %}
+                          {{ event.location.venue }}<br>
+                          <a href="https://www.google.com/maps?q={{ event.location.coordinates.latitude }},{{ event.location.coordinates.longitude }}" target="_blank">Map Link</a>
+                      {% endif %}
+                  </td>
+               
+                  </tr>
+                  {% endfor %}
+                  
+
+                </tbody>
+              </table>
+              {% else %}
+                <p>You've not registered any events yet.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </main>
+
+  <style>
+    .table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background-color: #f4f4f4;
+    padding: 10px;
+}
+
+.table tbody td {
+    padding: 10px;
+    text-align: center;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+  </style>
+
+  <script src="{{ url_for('static', filename='js/dash/bootstrap.bundle.min.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='js/dash/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/metismenu/metisMenu.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/apexchart/apexcharts.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/simplebar/js/simplebar.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='plugins/peity/jquery.peity.min.js') }}"></script>
+  
+  <script src="{{ url_for('static', filename='js/dash/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dash/dashboard1.js') }}"></script>
+  
+  <script>
+    new PerfectScrollbar(".user-list")
+  </script>
+</body>
+
+</html>

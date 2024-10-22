@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+    <style>
+      @font-face {
+        unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+          U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+          U+A720-A7FF;
+        font-weight: 400;
+        font-style: normal;
+        font-family: Figtree;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5XyEA25WTzZO_OSg.woff2);
+      }
+
+      @font-face {
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+          U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        font-weight: 400;
+        font-style: normal;
+        font-family: Figtree;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5ZyEA25WTzZO8.woff2);
+      }
+
+      :root {
+        --font-primary: Figtree, "_font_fallback_927697524111", sans-serif;
+      }
+
+      @font-face {
+        font-family: "_font_fallback_927697524111";
+        size-adjust: 100%;
+        src: local("Arial");
+        ascent-override: 95%;
+        descent-override: 25%;
+        line-gap-override: 0%;
+      }
+    </style>
+
+    <title>All Events</title>
+ 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hoisted.B0a9OMnn.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/_regular_.DHVsAuM-.css') }}" />
+
+    <script type="module" src="{{ url_for('static', filename='js/hoisted.TbJmQssT.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/hoisted.ZaE_CIdX.js') }}"></script>
+  </head>
+
+  <body>
+    <header class="header sticky top-0 z-30 mb-10">
+      <nav class="navbar container relative z-10">
+        <div class="order-0">
+          <a href="{{ url_for('home') }}" class="navbar-brand inline-block">
+            <img
+              src="{{ url_for('static', filename='svg/eventiq.svg') }}"
+              alt="event iq"
+              loading="lazy"
+              decoding="async"
+              class="inline-block"
+              style="height: 26px; width: 124px"
+              width="248"
+              height="52"
+            />
+          </a>
+        </div>
+
+        <input id="nav-toggle" type="checkbox" class="hidden" />
+       
+        <ul
+          id="nav-menu"
+          class="navbar-nav order-3 hidden pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-4"
+        >
+          
+          <li class="nav-item">
+            <a href="{{ url_for('events') }}" class="nav-link block false">
+              All Events
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url_for('search') }}" class="nav-link block false">
+              Search Events
+            </a>
+          </li>
+          
+        </ul>
+
+        <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+          <a
+            class="btn btn-primary bg-transparent hidden lg:flex bg-none has-icon"
+            href="url_for('login')"
+          >
+            <span class="value">
+              <span data-content="Login">Signup</span>
+            </span>
+            <span class="icon">
+              <span>
+                <span>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 320 512"
+                    class="text-xs"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+                    ></path>
+                  </svg>
+                </span>
+                <span>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 320 512"
+                    aria-hidden="true"
+                    class="text-xs"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+                    ></path>
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute left-1/2 top-[-82px] -z-10 h-[424px] w-full -translate-x-1/2 rounded-full from-secondary via-secondary to-red-700 to-90% opacity-60 blur-[100px] bg-gradient-[270deg] lg:w-[884px] lg:rotate-[-19deg]"
+    ></div>
+    <main id="main-content">
+      <section class="section">
+        <div class="container">
+          <div class="row">
+            <div
+              class="mx-auto text-center lg:col-8 xl:col-7"
+              data-aos="fade-up-sm"
+            >
+            <h1 class="has-gradient mb-6">Discover All Events</h1>
+            <p class="text-lg/[inherit] opacity-800">
+                "Connect, Learn, and Grow: Find Events Near You or Explore Globally"
+            </p>
+            </div>
+          </div>
+        </div>
+      </section>
+        <div class="category-section">
+          <p class="text-lg/[inherit] opacity-1000"  style="text-decoration: underline;">Select on your preffered city to get events</p>
+          <br>
+          
+          <div class="category-filter">
+            <div class="category-filter">
+              <button class="category-button" onclick="filterEvents('location', 'all-events')">All Events</button>
+          </div>
+            
+          </div>
+      </div>
+
+        <div class="category-section">
+            <br>
+            
+            <div class="category-filter">
+                <button class="category-button" onclick="filterEvents('location', 'Bengaluru (Bangalore)')">Bengaluru (Bangalore)</button>
+                <button class="category-button" onclick="filterEvents('location', 'Mysuru (Mysore)')">Mysuru (Mysore)</button>
+                <button class="category-button" onclick="filterEvents('location', 'Mangalore')">Mangalore</button>
+                <button class="category-button" onclick="filterEvents('location', 'Mumbai')">Mumbai</button>
+                <button class="category-button" onclick="filterEvents('location', 'Indore')">Indore</button>
+                <button class="category-button" onclick="filterEvents('location', 'Pune')">Pune</button>
+                <button class="category-button" onclick="filterEvents('location', 'Nagpur')">Nagpur</button>
+                <button class="category-button" onclick="filterEvents('location', 'Chennai')">Chennai</button>
+                <button class="category-button" onclick="filterEvents('location', 'Coimbatore')">Coimbatore</button>
+                <button class="category-button" onclick="filterEvents('location', 'Hyderabad')">Hyderabad</button>
+                <button class="category-button" onclick="filterEvents('location', 'Warangal')">Warangal</button>
+                <button class="category-button" onclick="filterEvents('location', 'New Delhi')">New Delhi</button>
+                <button class="category-button" onclick="filterEvents('location', 'Gurugram (Gurgaon)')">Gurugram (Gurgaon)</button> 
+                <button class="category-button" onclick="filterEvents('location', 'Noida')">Noida</button>
+                <button class="category-button" onclick="filterEvents('location', 'Ahmedabad')">Ahmedabad</button>
+                <button class="category-button" onclick="filterEvents('location', 'Lucknow')">Lucknow</button>
+                <button class="category-button" onclick="filterEvents('location', 'Vadodara (Baroda)')">Vadodara (Baroda)</button>
+                <button class="category-button" onclick="filterEvents('location', 'Gandhinagar')">Gandhinagar</button>
+                <button class="category-button" onclick="filterEvents('location', 'Visakhapatnam (Vizag)')">Visakhapatnam (Vizag)</button>
+                <button class="category-button" onclick="filterEvents('location', 'Vijayawada')">Vijayawada</button>
+                <button class="category-button" onclick="filterEvents('location', 'Kochi (Cochin)')">Kochi (Cochin)</button>
+                <button class="category-button" onclick="filterEvents('location', 'Thiruvananthapuram (Trivandrum)')">Thiruvananthapuram (Trivandrum)</button>
+                <button class="category-button" onclick="filterEvents('location', 'Palakkad')">Palakkad</button>
+                <button class="category-button" onclick="filterEvents('location', 'Kozhikode (Calicut)')">Kozhikode (Calicut)</button>
+                <button class="category-button" onclick="filterEvents('location', 'Kolkata')">Kolkata</button>
+                <button class="category-button" onclick="filterEvents('location', 'Kharagpur')">Kharagpur</button>
+              
+            </div>
+        </div>
+       
+    </section>
+    <div id="events-container">
+      
+      {% include 'events/event-list.html' %}
+  </div> 
+     
+    </main>
+    
+    <style>
+      .category-filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.category-section {
+    text-align: center;
+}
+
+.category-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.category-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.category-button {
+    background: none;
+    border: 1px solid #333;
+    font-size: 1rem;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.category-button.active {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.category-button:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+    </style>
+
+    <script>
+    function filterEvents(filterType, filterValue) {
+    // Remove active class from all buttons
+    document.querySelectorAll('.category-button').forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // Add active class to the clicked button
+    event.target.classList.add('active');
+
+    // Construct the URL based on the filter type and value
+    const url = filterType && filterValue ? `/events?${filterType}=${filterValue}` : `/events`;
+
+    // Fetch the filtered events from the server
+    fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        .then(response => response.text())
+        .then(html => {
+            // Insert the received HTML into the events container
+            const eventsContainer = document.getElementById('events-container');
+            eventsContainer.innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading events:', error);
+        });
+}
+    </script>
+    
+    
+    
+    <footer class="py-10 md:py-16 xl:py-24">
+      <div class="container" data-aos="fade-up-sm">
+        <div class="row gy-6 justify-between lg:g-4">
+          
+          <div class="col-12 pt-5 md:pt-20">
+            <div
+              class="flex flex-col md:flex-row justify-between border-t border-border pt-10 pb-5"
+            >
+              <div>
+                <p class="text-sm text-white/60">
+                  Copyright © 2024 EventIQ. All Rights Reserved
+                </p>
+              </div>
+              <div>
+                <ul class="flex md:justify-end gap-4">
+                  <li>
+                    <a
+                      class="text-sm text-white/60 transition hover:text-secondary"
+                      
+                    >
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="text-sm text-white/60 transition hover:text-secondary"
+                      
+                    >
+                      Terms &amp; Conditions
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

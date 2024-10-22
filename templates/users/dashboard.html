@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en" data-bs-theme="blue-theme">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event IQ | User Dashboard</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+  <link href="{{ url_for('static', filename='css/dash/pace.min.css') }}" rel="stylesheet">
+  <script src="{{ url_for('static', filename='js/dash/pace.min.js') }}">
+  </script>
+  <link href="{{ url_for('static', filename='plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/metismenu/metisMenu.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/metismenu/mm-vertical.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='plugins/simplebar/css/simplebar.css') }}">
+  <link href="{{ url_for('static', filename='css/dash/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/bootstrap-extended.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/main.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/horizontal-menu.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/dark-theme.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/blue-theme.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/semi-dark.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/bordered-theme.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/dash/sass/responsive.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+  <header class="top-header">
+    <nav class="navbar navbar-expand align-items-center justify-content-between gap-4 border-bottom">
+      <a href="{{ url_for('home') }}" class="text-decoration-none">
+        <div class="logo-header d-none d-xl-flex align-items-center gap-2">
+          <div class="logo-icon">
+            <img src="{{ url_for('static', filename='images/favicon.png') }}" class="logo-img" width="45" alt="">
+          </div>
+          <div class="logo-name">
+            <h5 class="mb-0">Event IQ</h5>
+          </div>
+        </div>
+      </a>
+      
+      <div class="btn-toggle d-xl-none" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+        <a href=""><i class="material-icons-outlined">menu</i></a>
+      </div>
+     
+      <ul class="navbar-nav gap-1 nav-right-links align-items-center">
+  
+        <li class="nav-item dropdown">
+          <a href="javascript:;" class="dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+            <!-- Check if it's a Firebase user (URL) or a MongoDB user (base64 image) -->
+            {% if is_firebase %}
+              <img src="{{ profile_image }}" class="rounded-circle p-1 border" width="45" height="45" alt="Profile Image">
+            {% else %}
+              <img src="data:image/png;base64,{{ profile_image }}" class="rounded-circle p-1 border" width="45" height="45" alt="Profile Image">
+            {% endif %}
+          </a>
+          <div class="dropdown-menu dropdown-user dropdown-menu-end shadow">
+            <a class="dropdown-item gap-2 py-2" href="">
+              <div class="text-center">
+                <!-- Use the appropriate image format based on login type -->
+                {% if is_firebase %}
+                  <img src="{{ profile_image }}" class="rounded-circle p-1 shadow mb-3" width="90" height="90" alt="Profile Image">
+                {% else %}
+                  <img src="data:image/png;base64,{{ profile_image }}" class="rounded-circle p-1 shadow mb-3" width="90" height="90" alt="Profile Image">
+                {% endif %}
+                <h5 class="user-name mb-0 fw-bold">Hello, {{ user['name'] }}</h5>
+              </div>
+            </a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{ url_for('logout') }}">
+              <i class="material-icons-outlined">power_settings_new</i>Logout
+            </a>
+          </div>
+        </li>
+        
+      </ul>
+  
+    </nav>
+  </header>
+  <!--end top header-->
+
+<!--navigation-->
+<div class="primary-menu">
+  <nav class="navbar navbar-expand-xl align-items-center">
+   <div class="offcanvas offcanvas-start w-260" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+   
+    <div class="offcanvas-body p-0">
+     
+
+    <div class="card">
+        <br>
+        <!-- <div class="card-body"> -->
+            <div class="row row-cols-auto g-3">
+              
+                <!-- Profile Button -->
+                <div class="col">
+                    <button type="button" class="btn btn-grd btn-grd-primary px-5 d-flex flex-column align-items-center"
+                    onclick="window.location.href='{{ url_for('dashboard') }}'">
+                        <i class="material-icons-outlined">account_circle</i>
+                        <span>Profile</span>
+                    </button>
+                </div>
+    
+                <!-- Info Button -->
+                <div class="col">
+                    <button type="button" class="btn btn-grd btn-grd-info px-5 d-flex flex-column align-items-center"
+                    onclick="window.location.href='{{ url_for('event_registered') }}'">
+                        <i class="material-icons-outlined">calendar_today</i>
+                        <span>Event Registered</span>
+                    </button>
+                </div>
+            </div>
+        <!-- </div> -->
+    </div>
+    
+   </div>
+
+   </div>
+ </nav>
+</div>
+<!--end navigation-->
+
+
+<br>
+<br>
+<br>
+  <!--start main wrapper-->
+  <main class="main-wrapper">
+    <div class="main-content">
+      <!--breadcrumb-->
+      <div class="page-breadcrumb d-none d-sm-flex justify-content-center align-items-center mb-3">
+        <div class="d-flex align-items-center">
+          
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;"><i class="bx bx-home-heart"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+              </ol>
+            </nav>
+          <!-- </div> -->
+        </div>
+      </div>
+      
+				<!--end breadcrumb-->
+      <br>
+      <br>
+      <br>
+
+      <div class="card rounded-4">
+        <div class="card-body p-4">
+          <div class="position-relative mb-5">
+
+            <div class="profile-avatar position-absolute top-100 start-50 translate-middle">
+              {% if is_firebase %}
+                  <!-- If user is Firebase and has a profile image URL -->
+                  <img src="{{ profile_image }}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt="Profile Image">
+              {% else %}
+                  <!-- If user is normal (MongoDB login) and has a base64 profile image -->
+                  {% if profile_image %}
+                      <img src="data:image/png;base64,{{ profile_image }}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt="Profile Image">
+                  {% else %}
+                      <!-- Placeholder image if profile image is not available -->
+                      <img src="{{ url_for('static', filename='images/no-photo.png')}}" class="img-fluid rounded-circle p-1 bg-grd-danger shadow" width="170" height="170" alt="Profile Image">
+                  {% endif %}
+              {% endif %}
+          </div>
+        </div>
+          <div class="profile-info pt-5 d-flex flex-column align-items-center justify-content-center text-center">
+            <div>
+              <h3>{{ user['name'] }}</h3>
+              <p class="mb-0">{{ user['country'] }}<br>
+                </p>
+            </div>
+          </div>
+          <div class="keywords d-flex justify-content-center gap-3 mt-4 overflow-x-auto">
+            {% if user_interests and user_interests|length > 0 %}
+            <!-- Loop through interests and display as buttons -->
+            {% for interest in user_interests %}
+                <button type="button" class="btn btn-sm btn-light rounded-5 px-4">{{ interest }}</button>
+            {% endfor %}
+        
+            <!-- <p class="mt-3">
+                <a href="{{ url_for('save_interests') }}">Update your interests here</a>
+            </p> -->
+
+            
+        
+        {% endif %}
+        
+
+        </div>
+
+        <div class="keywords d-flex justify-content-center gap-3 mt-4 overflow-x-auto">
+            <p class="mt-3">
+                <a href="{{ url_for('save_interests') }}">Update your interests here</a>
+            </p>
+        </div>
+
+        <div class="keywords d-flex justify-content-center gap-3 mt-4 overflow-x-auto">
+            <a href="{{ url_for('search_events', query=user_interests | join(', ')) }}" class="btn btn-primary">
+                Get Personalized Events Based on Your Interests
+            </a>
+        </div>
+        </div>
+      </div>
+    
+    </div>
+  </main>
+  <!--end main wrapper-->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0 p-0">
+      <li class="breadcrumb-item">
+        <a href="javascript:;" class="breadcrumb-link">
+          <i class="bx bx-home-heart"></i>
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+    </ol>
+  </nav>
+  
+  <!-- Include some additional styles for the breadcrumb and image -->
+  <style>
+    .breadcrumb {
+      font-size: 1.25rem; /* Increase the font size of the breadcrumb */
+      padding: 0.75rem 1rem; /* Adjust the padding for better spacing */
+    }
+  
+    .breadcrumb-item {
+      font-size: 1.15rem; /* Slightly larger text for each breadcrumb item */
+    }
+  
+    .breadcrumb-link {
+      font-size: 1.5rem; /* Increase the size of the home icon link */
+    }
+  
+    .breadcrumb-link i {
+      font-size: 2rem; /* Increase the size of the home icon */
+      vertical-align: middle; /* Align the icon vertically with the text */
+    }
+  
+    .breadcrumb-item.active {
+      font-weight: bold; /* Make the active breadcrumb item bold */
+    }
+  </style>
+
+<script src="{{ url_for('static', filename='js/dash/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dash/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/metismenu/metisMenu.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/apexchart/apexcharts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/simplebar/js/simplebar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/peity/jquery.peity.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dash/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dash/dashboard1.js') }}"></script>
+</body>
+</html>

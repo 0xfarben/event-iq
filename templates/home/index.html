@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+  <style>
+    @font-face {
+      unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+        U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+        U+A720-A7FF;
+      font-weight: 400;
+      font-style: normal;
+      font-family: Figtree;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5XyEA25WTzZO_OSg.woff2);
+    }
+
+    @font-face {
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+        U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+        U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      font-weight: 400;
+      font-style: normal;
+      font-family: Figtree;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5ZyEA25WTzZO8.woff2);
+    }
+
+    :root {
+      --font-primary: Figtree, "_font_fallback_927697524111", sans-serif;
+    }
+
+    @font-face {
+      font-family: "_font_fallback_927697524111";
+      size-adjust: 100%;
+      src: local("Arial");
+      ascent-override: 95%;
+      descent-override: 25%;
+      line-gap-override: 0%;
+    }
+  </style>
+
+  <title>Event | Homepage</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/hoisted.B0a9OMnn.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/_regular_.DHVsAuM-.css') }}" />
+  <script type="module" src="{{ url_for('static', filename='js/hoisted.TbJmQssT.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/hoisted.ZaE_CIdX.js') }}"></script>
+</head>
+
+<body>
+  <header class="header sticky top-0 z-30 mb-10">
+    <nav class="navbar container relative z-10">
+      <div class="order-0">
+        <a href="{{ url_for('home') }}" class="navbar-brand inline-block">
+          <img src="{{ url_for('static', filename='svg/eventiq.svg') }}" alt="event iq" loading="lazy" decoding="async"
+            class="inline-block" style="height: 26px; width: 124px" width="248" height="52" />
+        </a>
+      </div>
+      <input id="nav-toggle" type="checkbox" class="hidden" />
+      <ul id="nav-menu"
+        class="navbar-nav order-3 hidden pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-4">
+
+        <li class="nav-item">
+          <a href="{{ url_for('events') }}" class="nav-link block false">
+            All Events
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ url_for('search') }}" class="nav-link block false">
+            Search Events
+          </a>
+        </li>
+
+      </ul>
+
+      <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+        <a class="btn btn-primary bg-transparent hidden lg:flex bg-none has-icon" href="{{ url_for('dashboard') }}">
+          <span class="value">
+            <span data-content="Dashboard">Dashboard</span>
+          </span>
+          <span class="icon">
+            <span>
+              <span>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" class="text-xs"
+                  height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                  </path>
+                </svg>
+              </span>
+              <span>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 320 512" aria-hidden="true"
+                  class="text-xs" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z">
+                  </path>
+                </svg>
+              </span>
+            </span>
+          </span>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <div aria-hidden="true"
+    class="pointer-events-none absolute left-1/2 top-[-82px] -z-10 h-[424px] w-full -translate-x-1/2 rounded-full from-secondary via-secondary to-red-700 to-90% opacity-60 blur-[100px] bg-gradient-[270deg] lg:w-[884px] lg:rotate-[-19deg]">
+  </div>
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="mx-auto text-center lg:col-9 xl:col-8" data-aos="fade-up-sm">
+            <!-- <h1 class="has-gradient mb-1">Discover, Engage, Elevate with Event IQ</h1> -->
+      
+            <h1 class="has-gradient mb-10">AI-Driven Event Experiences Tailored Just for You – Unleash the Future of Event Management</h1>
+<p class="text-lg/[inherit] opacity-800">Revolutionizing How You Find, Connect, and Experience Events—Powered by AI Intelligence.</p>
+
+            <br />
+            <br />
+            <p class="text-lg/[inherit] opacity-800">
+            </p>
+          </div>
+        </div>
+      </div>
+      
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button onclick="window.location.href='{{ url_for('events') }}'" class="button" style="--clr: #7808d0">
+          <span class="button__icon-wrapper">
+            <svg viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="button__icon-svg" width="10">
+              <path
+                d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                fill="currentColor"></path>
+            </svg>
+            <svg viewBox="0 0 14 15" fill="none" width="10" xmlns="http://www.w3.org/2000/svg"
+              class="button__icon-svg button__icon-svg--copy">
+              <path
+                d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+                fill="currentColor"></path>
+            </svg>
+          </span>
+          Explore All
+        </button>
+
+        <style>
+          .button {
+            line-height: 1;
+            text-decoration: none;
+            display: inline-flex;
+            border: none;
+            cursor: pointer;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: var(--clr);
+            color: #fff;
+            border-radius: 10rem;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            padding-left: 20px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: background-color 0.3s;
+          }
+
+          .button__icon-wrapper {
+            flex-shrink: 0;
+            width: 25px;
+            height: 25px;
+            position: relative;
+            color: var(--clr);
+            background-color: #fff;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+          }
+
+          .button:hover {
+            background-color: #000;
+          }
+
+          .button:hover .button__icon-wrapper {
+            color: #000;
+          }
+
+          .button__icon-svg--copy {
+            position: absolute;
+            transform: translate(-150%, 150%);
+          }
+
+          .button:hover .button__icon-svg:first-child {
+            transition: transform 0.3s ease-in-out;
+            transform: translate(150%, -150%);
+          }
+
+          .button:hover .button__icon-svg--copy {
+            transition: transform 0.3s ease-in-out 0.1s;
+            transform: translate(0);
+          }
+        </style>
+      </div>
+
+
+
+
+    </section>
+  </main>
+  <footer class="py-10 md:py-16 xl:py-24">
+    <div class="container" data-aos="fade-up-sm">
+      <div class="row gy-6 justify-between lg:g-4">
+
+        <div class="col-12 pt-5 md:pt-20">
+          <div class="flex flex-col md:flex-row justify-between border-t border-border pt-10 pb-5">
+            <div>
+              <p class="text-sm text-white/60">
+                Copyright © 2024 EventIQ. All Rights Reserved
+              </p>
+            </div>
+            <div>
+              <ul class="flex md:justify-end gap-4">
+                <li>
+                  <a class="text-sm text-white/60 transition hover:text-secondary" href="#">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a class="text-sm text-white/60 transition hover:text-secondary" href="#">
+                    Terms &amp; Conditions
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

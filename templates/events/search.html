@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+   
+    <style>
+      @font-face {
+        unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+          U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+          U+A720-A7FF;
+        font-weight: 400;
+        font-style: normal;
+        font-family: Figtree;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5XyEA25WTzZO_OSg.woff2);
+      }
+
+      @font-face {
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+          U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        font-weight: 400;
+        font-style: normal;
+        font-family: Figtree;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5ZyEA25WTzZO8.woff2);
+      }
+
+      :root {
+        --font-primary: Figtree, "_font_fallback_927697524111", sans-serif;
+      }
+
+      @font-face {
+        font-family: "_font_fallback_927697524111";
+        size-adjust: 100%;
+        src: local("Arial");
+        ascent-override: 95%;
+        descent-override: 25%;
+        line-gap-override: 0%;
+      }
+
+      @font-face { 
+        font-family:'Thicccboi';
+        src:url('https://assets.website-files.com/61113c4e9f23df1e7f554117/61113dee61ddcb711e07aeb6_THICCCBOI-Bold.ttf') format('truetype');
+        font-weight:700;
+        font-style:normal;
+        font-display:swap;
+      } 
+      @font-face { 
+        font-family:'Thicccboi';
+        src:url('https://assets.website-files.com/61113c4e9f23df1e7f554117/61113dee6cbb630b6033a428_THICCCBOI-Medium.ttf') format('truetype');
+        font-weight:500;
+        font-style:normal;
+        font-display:swap;
+      } 
+      @font-face { 
+        font-family:'Thicccboi';
+        src:url('https://assets.website-files.com/61113c4e9f23df1e7f554117/61113deeeb3e8a3b9b58b3cb_THICCCBOI-SemiBold.ttf') format('truetype');
+        font-weight:600;
+        font-style:normal;
+        font-display:swap;
+      } 
+        body {  
+          color:var(--neutral-400);
+          font-family:sans-serif;
+          font-size:18px;
+          line-height:1.667em;
+          font-weight:500;
+        }  
+      * { 
+          box-sizing: border-box;
+      } 
+      
+      body { 
+          margin: 0;
+      } 
+      
+      body { 
+          min-height: 100%; 
+          color: #333; 
+          background-color: #fff; 
+          margin: 0; 
+          font-family: Arial, sans-serif; 
+          font-size: 14px; 
+          line-height: 20px;
+      } 
+      
+      body { 
+          background-color: var(--neutral-800); 
+          color: var(--neutral-400); 
+          font-family: Thicccboi, sans-serif; 
+          font-size: 18px; 
+          font-weight: 500; 
+          line-height: 1.667em;
+      } 
+      
+      html { 
+          -ms-text-size-adjust: 100%; 
+          -webkit-text-size-adjust: 100%; 
+          font-family: sans-serif;
+      } 
+      
+      html { 
+          height: 100%;
+      } 
+      
+      :root { 
+          --neutral-800: #13111a; 
+          --neutral-400: #b7b4c7; 
+          --neutral-100: white; 
+          --neutral-700: #302c3f; 
+      } 
+      
+      .container-medium-713px { 
+          max-width: 713px; 
+          margin-left: auto; 
+          margin-right: auto; 
+          padding-left: 24px; 
+          padding-right: 24px;
+      } 
+      
+      .container-medium-713px.blog-hero { 
+          z-index: 1; 
+          text-align: center; 
+          margin-bottom: 76px; 
+          position: relative;
+      } 
+      
+      .paragraph.blog-hero { 
+          margin-bottom: 41px;
+      } 
+      
+      .w-form { 
+          margin: 0 0 15px;
+      } 
+      
+      .blog-newsletter-form-block { 
+          margin-bottom: 0;
+      } 
+      
+      .text-no-wrap { 
+          white-space: nowrap;
+      } 
+      
+      .blog-newsletter-form { 
+          align-items: center; 
+          display: flex; 
+          position: relative;
+      } 
+      .blog-newsletter-form input[type="text"] {
+    background-color: #333 !important;
+    color: #fff !important;
+    border: 1px solid #ccc !important;
+}
+      
+      .w-form-done { 
+          text-align: center; 
+          background-color: #ddd; 
+          padding: 20px; 
+          display: none;
+      } 
+      
+      .success-message { 
+          background-color: var(--neutral-700); 
+          color: var(--neutral-100); 
+          text-align: center; 
+          border-radius: 12px; 
+          margin-top: 10px; 
+          margin-bottom: 10px; 
+          padding-left: 10px; 
+          padding-right: 10px; 
+          font-weight: 700;
+      } 
+      
+      .w-form-fail { 
+          background-color: #ffdede; 
+          margin-top: 10px; 
+          padding: 10px; 
+          display: none;
+      } 
+      
+      .error-message { 
+          color: var(--neutral-100); 
+          text-align: center; 
+          background-color: #ff4b4e; 
+          border-radius: 12px; 
+          margin-top: 32px; 
+          padding-top: 20px; 
+          padding-bottom: 20px; 
+          font-weight: 600;
+      } 
+      
+      input { 
+          color: inherit; 
+          font: inherit; 
+          margin: 0;
+      } 
+      
+      input { 
+          line-height: normal;
+      } 
+      
+      .w-input { 
+          width: 100%; 
+          height: 38px; 
+          color: #333; 
+          vertical-align: middle; 
+          background-color: #fff; 
+          border: 1px solid #ccc; 
+          margin-bottom: 10px; 
+          padding: 8px 12px; 
+          font-size: 14px; 
+          line-height: 1.42857; 
+          display: block;
+      } 
+      
+      .input { 
+    min-height: 56px; 
+    background-color: var(--neutral-700); 
+    color: #fff; /* Change text color to white */
+    font-weight: 800;
+    border: 0 solid #000; 
+    border-radius: 12px; 
+    margin-bottom: 0; 
+    padding-left: 24px; 
+    padding-right: 24px;  
+    transition: background-color .3s, color .3s;
+} 
+      
+      .input.blog-newsletter { 
+          min-height: 84px; 
+          border-radius: 1000px; 
+          padding-left: 37px; 
+          padding-right: 200px;
+      } 
+      
+      .button-primary-gradient { 
+          transform-style: preserve-3d; 
+          background-image: linear-gradient(to right, #6f86ff, #b372ce 49%, #ff7586); 
+          border-radius: 10000px; 
+          padding: 2px; 
+          transition: transform .3s; 
+          display: inline-block; 
+          transform: scale3d(1, 1, 1.01); 
+          box-shadow: 0 3px 7px rgba(19, 17, 26, .14);
+      } 
+      
+      .button-primary-gradient.blog-newsletter { 
+          position: absolute; 
+          right: 18px;
+      } 
+      
+      .button-primary-gradient:hover { 
+          transform: scale3d(1.04, 1.04, 1.01);
+      } 
+      
+      .w-button { 
+          color: #fff; 
+          line-height: inherit; 
+          cursor: pointer; 
+          background-color: #3898ec; 
+          border: 0; 
+          border-radius: 0; 
+          padding: 9px 15px; 
+          text-decoration: none; 
+          display: inline-block;
+      } 
+      
+      .button-primary { 
+          background-color: var(--neutral-800); 
+          color: var(--neutral-100); 
+          text-align: center; 
+          letter-spacing: .01em; 
+          border-radius: 1000px; 
+          padding: 22px 56px; 
+          font-weight: 700; 
+          line-height: 1.111em;
+      } 
+      
+      input.w-button { 
+          -webkit-appearance: button;
+      } 
+      
+      .button-primary.small { 
+          padding: 18px 38px;
+      } 
+      
+      
+      /* These were inline style tags. Uses id+class to override almost everything */
+      #style-kj7Tp.style-kj7Tp {  
+         transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);  
+          transform-style: preserve-3d;  
+          opacity: 1;  
+      }  
+      #style-xv8M5.style-xv8M5 {  
+         transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);  
+          transform-style: preserve-3d;  
+          opacity: 1;  
+      }  
+      #style-BbpRb.style-BbpRb {  
+         transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);  
+          transform-style: preserve-3d;  
+          opacity: 1;  
+      }           
+    </style>
+ 
+    <title>Event IQ - Search Events</title>
+   
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hoisted.B0a9OMnn.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/_regular_.DHVsAuM-.css') }}" />
+    <script type="module" src="{{ url_for('static', filename='js/hoisted.TbJmQssT.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/hoisted.ZaE_CIdX.js') }}"></script>
+  </head>
+
+  <body>
+    <header class="header sticky top-0 z-30 mb-10">
+      <nav class="navbar container relative z-10">
+        <!-- logo -->
+        <div class="order-0">
+          <a href="{{ url_for('home') }}" class="navbar-brand inline-block">
+            <img
+              src="{{ url_for('static', filename='svg/eventiq.svg') }}"
+              alt="event iq"
+              loading="lazy"
+              decoding="async"
+              class="inline-block"
+              style="height: 26px; width: 124px"
+              width="248"
+              height="52"
+            />
+          </a>
+        </div>
+
+        <input id="nav-toggle" type="checkbox" class="hidden" />
+       
+        <ul
+          id="nav-menu"
+          class="navbar-nav order-3 hidden pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-4"
+        >
+          
+          <li class="nav-item">
+            <a href="{{ url_for('events') }}" class="nav-link block false">
+              All Events
+            </a>
+          </li>
+
+          <!-- <li class="nav-item">
+            <a href="index.html" class="nav-link block active"> Pricing </a>
+          </li> -->
+          <li class="nav-item">
+            <a href="{{ url_for('search') }}" class="nav-link block false">
+              Search Events
+            </a>
+          </li>
+          
+        </ul>
+
+        <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+          <a
+            class="btn btn-primary bg-transparent hidden lg:flex bg-none has-icon"
+            href="{{ url_for('dashboard') }}"
+          >
+            <span class="value">
+              <span data-content="Dashboard">Dashboard</span>
+            </span>
+            <span class="icon">
+              <span>
+                <span>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 320 512"
+                    class="text-xs"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+                    ></path>
+                  </svg>
+                </span>
+                <span>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 320 512"
+                    aria-hidden="true"
+                    class="text-xs"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+                    ></path>
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute left-1/2 top-[-82px] -z-10 h-[424px] w-full -translate-x-1/2 rounded-full from-secondary via-secondary to-red-700 to-90% opacity-60 blur-[100px] bg-gradient-[270deg] lg:w-[884px] lg:rotate-[-19deg]"
+    ></div>
+    <main id="main-content">
+      <section class="section">
+        <div class="container">
+          <div class="row">
+            <div
+              class="mx-auto text-center lg:col-8 xl:col-7"
+              data-aos="fade-up-sm"
+            >
+              
+            <h1 class="has-gradient mb-6">Transform Your Event Strategy</h1>
+            <p class="text-lg/[inherit] opacity-800">
+                "Harness the Power of MongoDB Vector Search for Unmatched Insights"
+            </p>
+            
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="container-medium-713px blog-hero snipcss-bFtMO">
+        <div data-w-id="cf573a1b-b40f-dbaa-55e6-498ccce2ed27" class="blog-newsletter-form-block w-form style-BbpRb" id="style-BbpRb">
+            <form id="text-form" name="text-form" data-name="text Form" method="get" class="blog-newsletter-form" data-wf-page-id="6112c014b1f02c27efeb85fb" 
+                  data-wf-element-id="cf573a1b-b40f-dbaa-55e6-498ccce2ed28" aria-label="text Form">
+                <input class="input blog-newsletter w-input" maxlength="256" name="text" data-name="text" 
+                       placeholder="Looking for an event? Search by name, venue, or date..." type="text" id="search-bar" required="" data-has-listeners="true">
+                <div class="button-primary-gradient blog-newsletter">
+                  <input type="submit"  data-wait="Please wait..." class="button-primary small w-button" value="Explore" onclick="handleSearch()" data-has-listeners="true">
+                </div>
+            </form>
+
+            
+            <div class="success-message w-form-done" tabindex="-1" role="region" aria-label="Email Form success">
+                <div>Thanks.</div>
+            </div>
+            <div class="error-message w-form-fail" tabindex="-1" role="region" aria-label="Email Form failure">
+                <div>Oops! Something went wrong.</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="events-container">
+      
+      {% include 'events/search-list.html' %}
+  </div> 
+      
+
+    </main>
+  
+    <script>
+      function handleSearch() {
+          const searchQuery = document.getElementById('search-bar').value.trim();
+          if (searchQuery) {
+              window.location.href = `/search-events?query=${encodeURIComponent(searchQuery)}`;
+          }
+      }
+  </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+    let searchBox = document.querySelector('.blog-newsletter-form input[type="text"]');
+    searchBox.style.backgroundColor = "#333";
+    searchBox.style.color = "#fff";
+});
+    </script>
+    
+    
+    <footer class="py-10 md:py-16 xl:py-24">
+      <div class="container" data-aos="fade-up-sm">
+        <div class="row gy-6 justify-between lg:g-4">
+          
+          <div class="col-12 pt-5 md:pt-20">
+            <div
+              class="flex flex-col md:flex-row justify-between border-t border-border pt-10 pb-5"
+            >
+              <div>
+                <p class="text-sm text-white/60">
+                  Copyright © 2024 EventIQ. All Rights Reserved
+                </p>
+              </div>
+              <div>
+                <ul class="flex md:justify-end gap-4">
+                  <li>
+                    <a
+                      class="text-sm text-white/60 transition hover:text-secondary"
+                      href="#"
+                    >
+                      Privacy Policy
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="text-sm text-white/60 transition hover:text-secondary"
+                      href="#"
+                    >
+                      Terms &amp; Conditions
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+  <script>
+    window.onload = function () {
+      console.log("Script loaded");  // Debugging step to ensure the script runs
+
+      // Fetch error and success messages passed from Flask
+      const errorMessage = "{{ error|tojson }}";
+      const successMessage = "{{ success|tojson }}";
+
+      // Debugging prints
+      console.log("Error message from server:", errorMessage);
+      console.log("Success message from server:", successMessage);
+
+      // Show error popup if there's an error
+      if (errorMessage && errorMessage !== "null") {
+        alert(errorMessage);
+      }
+
+      // Show success popup if there's a success message
+      if (successMessage && successMessage !== "null") {
+        alert(successMessage);
+      }
+    };
+  </script>
+  <style>
+    @font-face {
+      unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+        U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+        U+A720-A7FF;
+      font-weight: 400;
+      font-style: normal;
+      font-family: Figtree;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5XyEA25WTzZO_OSg.woff2);
+    }
+
+    @font-face {
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+        U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+        U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      font-weight: 400;
+      font-style: normal;
+      font-family: Figtree;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5ZyEA25WTzZO8.woff2);
+    }
+
+    :root {
+      --font-primary: Figtree, "_font_fallback_927697524111", sans-serif;
+    }
+
+    @font-face {
+      font-family: "_font_fallback_927697524111";
+      size-adjust: 100%;
+      src: local("Arial");
+      ascent-override: 95%;
+      descent-override: 25%;
+      line-gap-override: 0%;
+    }
+  </style>
+<title>Event IQ | Sign Up</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/hoisted.B0a9OMnn.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/_regular_.DHVsAuM-.css') }}" />
+  <script type="module" src="{{ url_for('static', filename='js/hoisted.TbJmQssT.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/hoisted.ZaE_CIdX.js') }}"></script>
+</head>
+
+<body>
+  <header class="header sticky top-0 z-30 mb-10">
+    <nav class="navbar container relative z-10">
+      <div class="order-0">
+        <a href="{{ url_for('home') }}" class="navbar-brand inline-block">
+          <img src="{{ url_for('static', filename='svg/eventiq.svg') }}" alt="event iq" loading="lazy" decoding="async"
+            class="inline-block" style="height: 26px; width: 124px" width="248" height="52" />
+        </a>
+      </div>
+
+      <input id="nav-toggle" type="checkbox" class="hidden" />
+
+      <ul id="nav-menu"
+        class="navbar-nav order-3 hidden pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-4">
+
+        <li class="nav-item">
+          <a href="{{ url_for('events') }}" class="nav-link block false">
+            All Events
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{{ url_for('search') }}" class="nav-link block false">
+            Search Events
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  </header>
+
+  <div aria-hidden="true"
+    class="pointer-events-none absolute left-1/2 top-[-82px] -z-10 h-[424px] w-full -translate-x-1/2 rounded-full from-secondary via-secondary to-red-700 to-90% opacity-60 blur-[100px] bg-gradient-[270deg] lg:w-[884px] lg:rotate-[-19deg]">
+  </div>
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="lg:col-6" data-aos="fade-up-sm">
+            <div class="content relative min-h-full overflow-hidden rounded-lg border border-white/5 bg-theme-dark p-9">
+              <h1 class="text-2xl font-semibold mb-6 text-center">Signup</h1>
+
+              {% if error %}
+              <div style="color: red; font-weight: bold;">{{ error }}</div>
+              {% endif %}
+
+              <!-- Display success message on the page for debugging (if needed) -->
+              {% if success %}
+              <div style="color: green; font-weight: bold;">{{ success }}</div>
+              {% endif %}
+
+              <form action="{{ url_for('signup') }}" method="POST" enctype="multipart/form-data">
+                <div class="form-group mb-4">
+                  <input type="text" placeholder="Full Name" class="form-input" name="name" required />
+                </div>
+                <div class="form-group mb-4">
+                  <input type="email" placeholder="Email" class="form-input" name="email" required />
+                </div>
+                <div class="form-group mb-4">
+                  <input type="text" placeholder="Country" class="form-input" name="country" required />
+                </div>
+                <div class="form-group mb-4">
+                  <input type="password" placeholder="Password" class="form-input" name="password" required />
+                </div>
+                <div>
+                  <label for="profile_image" style="color: #f2caff;">Choose your profile image:</label>
+                  <br><br>
+                  <input type="file" id="profile_image" name="profile_image" style="color: #f2caff;" accept="image/*"
+                    required>
+                </div>
+                <br>
+                <button class="btn-primary w-full border border-5" type="submit">
+                  Signup
+                </button>
+              </form>
+
+              <br />
+              <p class="text-center  mt-4">
+                Already have an account?
+                <a href="{{ url_for('login') }}" style="color: #f2caff">Login here</a>
+              </p>
+              <a href="#" onclick="signInWithGoogle()">
+                <div
+                  class="w-[200px] border bg-transparent h-20  rounded-xl flex items-center justify-center space-x-4">
+                  <img src="{{ url_for('static', filename='images/dash/05.png') }}" alt="Google Logo" loading="lazy"
+                    decoding="async" class="h-8 w-8" width="40" height="40">
+                  <h3 class="text-base font-medium">Sign up with Google</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAEXhRJX8Skn9iBQszguG3oIyPUXVE6n9s",
+      authDomain: "evntiq-61f75.firebaseapp.com",
+      projectId: "evntiq-61f75",
+      storageBucket: "evntiq-61f75.appspot.com",
+      messagingSenderId: "20604553038",
+      appId: "1:20604553038:web:dd0fd913bcf20d095d801f",
+      measurementId: "G-6RFJXQFPWN"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Sign-in with Google function
+    window.signInWithGoogle = async function () {
+      const provider = new GoogleAuthProvider();
+      try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+
+        // Get ID token and send it to the Flask backend
+        const token = await user.getIdToken();
+        const response = await fetch('/firebase-login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ id_token: token })
+        });
+
+        if (response.ok) {
+          // Redirect to save_interests page after login
+          window.location.href = '/dashboard';
+        } else {
+          console.log("Response was not 'ok'.");
+          const errorText = await response.text();
+          throw new Error(errorText);
+        }
+      } catch (error) {
+        console.error("Error during sign-in:", error);
+      }
+    };
+  </script>
+
+
+  <style>
+    .content {
+      background-color: #262626;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 15px;
+      margin-top: 10px;
+      background-color: #333;
+      border: 1px solid #444;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .btn-primary {
+      background-color: #6f00ff;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #4b0082;
+    }
+  </style>
+
+</body>
+
+</html>

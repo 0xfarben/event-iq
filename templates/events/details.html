@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+    
+    <style>
+      @font-face {
+        unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+          U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+          U+A720-A7FF;
+        font-weight: 400;
+        font-style: normal;
+        font-family: Figtree;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5XyEA25WTzZO_OSg.woff2);
+      }
+      @font-face {
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+          U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        font-weight: 400;
+        font-style: normal;
+        font-family: Figtree;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/figtree/v5/_Xmz-HUzqDCFdgfMsYiV_F7wfS-Bs_d_QG5ZyEA25WTzZO8.woff2);
+      }
+      :root {
+        --font-primary: Figtree, "_font_fallback_1010629602134", sans-serif;
+      }
+      @font-face {
+        font-family: "_font_fallback_1010629602134";
+        size-adjust: 100%;
+        src: local("Arial");
+        ascent-override: 95%;
+        descent-override: 25%;
+        line-gap-override: 0%;
+      }
+    </style>
+  
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hoisted.B0a9OMnn.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/_regular_.DHVsAuM-.css') }}" />
+    <script type="module" src="{{ url_for('static', filename='js/hoisted.TbJmQssT.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='js/hoisted.ZaE_CIdX.js') }}"></script>
+  </head>
+  <body>
+    <header class="header sticky top-0 z-30 mb-10">
+      <nav class="navbar container relative z-10">
+        <div class="order-0">
+          <a href="{{ url_for('home') }}" class="navbar-brand inline-block">
+            <img
+             
+              src="{{ url_for('static', filename='svg/eventiq.svg') }}"
+              alt="event iq"
+              loading="lazy"
+              decoding="async"
+              class="inline-block"
+              style="height: 26px; width: 124px"
+              width="248"
+              height="52"
+            />
+          </a>
+        </div>
+        <input id="nav-toggle" type="checkbox" class="hidden" />
+        <label
+          for="nav-toggle"
+          class="order-3 flex cursor-pointer items-center text-text lg:order-1 lg:hidden"
+        >
+          <svg
+            id="show-button"
+            class="block h-6 fill-current"
+            viewBox="0 0 20 20"
+          >
+            <title>Menu Open</title>
+            <path d="M0 3h20v2H0V3z m0 6h20v2H0V9z m0 6h20v2H0V0z"></path>
+          </svg>
+          <svg
+            id="hide-button"
+            class="hidden h-6 fill-current"
+            viewBox="0 0 20 20"
+          >
+            <title>Menu Close</title>
+            <polygon
+              points="11 9 22 9 22 11 11 11 11 22 9 22 9 11 -2 11 -2 9 9 9 9 -2 11 -2"
+              transform="rotate(45 10 10)"
+            ></polygon>
+          </svg>
+        </label>
+         
+        <ul
+          id="nav-menu"
+          class="navbar-nav order-3 hidden pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-4"
+        >
+          
+          <li class="nav-item">
+            <a href="{{ url_for('events') }}" class="nav-link block false">
+              All Events
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('search') }}" class="nav-link block false">
+              Search Events
+            </a>
+          </li>
+         
+          <a
+            class="btn btn-primary bg-transparent mt-2 lg:hidden bg-none has-icon"
+            href="{{ url_for('dashboard') }}"
+          >
+            <span class="value">
+              <span data-content="Dashboard">Dashboard</span>
+            </span>
+            <span class="icon">
+              <span>
+                <span>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 320 512"
+                    class="text-xs"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+                    ></path>
+                  </svg>
+                </span>
+                <span>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 320 512"
+                    aria-hidden="true"
+                    class="text-xs"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+                    ></path>
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </a>
+        </ul>
+        <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+          <a
+            class="btn btn-primary bg-transparent hidden lg:flex bg-none has-icon"
+            href="{{ url_for('dashboard') }}"
+          >
+            <span class="value">
+              <span data-content="Dashboard">Dashboard</span>
+            </span>
+            <span class="icon">
+              <span>
+                <span>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 320 512"
+                    class="text-xs"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+                    ></path>
+                  </svg>
+                </span>
+                <span>
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 320 512"
+                    aria-hidden="true"
+                    class="text-xs"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+                    ></path>
+                  </svg>
+                </span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute left-1/2 top-[-82px] -z-10 h-[424px] w-full -translate-x-1/2 rounded-full from-secondary via-secondary to-red-700 to-90% opacity-60 blur-[100px] bg-gradient-[270deg] lg:w-[884px] lg:rotate-[-19deg]"
+    ></div>
+    <main id="main-content">
+      
+      <section class="section pt-5">
+        <div class="container">
+          <div class="row gy-4 flex-col-reverse items-start justify-start lg:flex-row">
+            <!-- Main Content Column -->
+        <div class="lg:col-8" data-aos="fade-up-sm">
+          <div class="content relative min-h-full overflow-hidden rounded-lg border border-white/5 bg-theme-dark p-9">
+            
+            <!-- Event Title -->
+            <h2 class="text-2xl font-semibold mb-4">{{ event.title }}</h2>
+            
+            <!-- Event Description -->
+            {% if event.description and event.description != "N/A" %}
+              <p class="mb-6">{{ event.description }}</p>
+            {% endif %}
+
+            <!-- Event Date -->
+            {% if event.date.start_date and event.date.start_date != "N/A" and event.date.end_date and event.date.end_date != "N/A" %}
+              <h4 class="text-lg font-semibold">Date:</h4>
+              <p>From: {{ event.date.start_date | format_datetime }} <br> To: {{ event.date.end_date | format_datetime }}</p>
+            {% endif %}
+            
+            <!-- Event Location -->
+            {% if event.location.venue and event.location.venue != "N/A" %}
+            <h4 class="text-lg font-semibold mt-4">Location:</h4>
+            <p>{{ event.location.venue }}{% if event.location.city and event.location.city != "N/A" %} - {{ event.location.city }}{% endif %}{% if event.location.country and event.location.country != "N/A" %}, {{ event.location.country }}{% endif %}</p>
+          {% endif %}
+
+            
+            
+            <!-- Event Organizer -->
+            {% if event.organizer.name and event.organizer.name != "N/A" %}
+              <h4 class="text-lg font-semibold mt-4">Organizer:</h4>
+              <p>{{ event.organizer.name }}</p>
+            {% endif %}
+            {% if event.organizer.contact_email and event.organizer.contact_email != "N/A" %}
+              <p>Mail: <a href="mailto:{{ event.organizer.contact_email }}" class="text-blue-500 underline">{{ event.organizer.contact_email }}</a></p>
+            {% endif %}
+
+            <!-- Event Price and Registration Status -->
+            <h4 class="text-lg font-semibold mt-4">Price:</h4>
+            <p>{{ event.price > 0 and ('$' ~ event.price) or 'Free' }}</p>
+            {% if event.registration_status and event.registration_status != "N/A" %}
+              <h4 class="text-lg font-semibold mt-4">Registration Status:</h4>
+              <p>{{ event.registration_status }}</p>
+            {% endif %}
+
+            <!-- Available Tickets -->
+            <h4 class="text-lg font-semibold mt-4">Available Tickets:</h4>
+            <p>
+              {% if event.available_tickets > 0 %}
+                {{ event.available_tickets }}
+              {% else %}
+                No tickets available
+              {% endif %}
+            </p>
+
+            <!-- Event Tags -->
+            {% if event.tags %}
+              <h4 class="text-lg font-semibold mt-4">Tags:</h4>
+              <p>{{ event.tags | join(", ") }}</p>
+            {% endif %}
+
+
+            <!-- Event Speakers -->
+            {% if event.speakers %}
+              <h4 class="text-lg font-semibold mt-4">Speakers:</h4>
+              <ul>
+                {% for speaker in event.speakers %}
+                  {% if speaker.name and speaker.name != "N/A" %}
+                    <li>{{ speaker.name }}{% if speaker.title and speaker.title != "N/A" %} - {{ speaker.title }}{% if speaker.company and speaker.company != "N/A" %} at {{ speaker.company }}{% endif %}{% endif %}</li>
+                  {% endif %}
+                  {% if speaker.bio and speaker.bio != "N/A" %}
+                    <p class="text-sm opacity-70">{{ speaker.bio }}</p>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+    
+   
+            <br />
+   
+            {% if event.location.coordinates.latitude != 0.0 and event.location.coordinates.longitude != 0.0 and event.location.coordinates.longitude != "N/A"
+            and event.location.coordinates.longitude != "Not Available" and event.location.coordinates.latitude != "N/A" and event.location.coordinates.latitude != "Not Available"%}
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px;">
+              <button class="toggle-button" onclick="toggleSatellite()">Toggle Satellite View</button>
+              <a href="https://www.google.com/maps?q={{ event.location.coordinates.latitude }},{{ event.location.coordinates.longitude }}" " target="_blank" class="map-link">View on Google Maps</a>
+             
+      </div>
+
+      <div id="map" style="height: 400px;"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Your Mapbox access token
+        mapboxgl.accessToken = 'pk.eyJ1IjoidGhheTEyMjMiLCJhIjoiY20yZDhlM2thMHB3MjJqc2Z2MGZjemlnbiJ9.PvcdJHcWjNtGZI2rBsig1A';
+
+        // Initialize the map
+        var map = new mapboxgl.Map({
+          container: 'map', // ID of the div where the map will be rendered
+          style: 'mapbox://styles/mapbox/streets-v11', // Default map style
+          center: [{{ event.location.coordinates.longitude }}, {{ event.location.coordinates.latitude }}], // Starting position [lng, lat]
+          zoom: 13 // Zoom level
+        });
+
+        // Add a marker at the event location
+        var marker = new mapboxgl.Marker()
+          .setLngLat([{{ event.location.coordinates.longitude }}, {{ event.location.coordinates.latitude }}])
+          .setPopup(new mapboxgl.Popup({ offset: 25 }) // Add a popup
+            .setHTML('<h3 style="color: #ff5733;">{{ event.title }}</h3><p style="color: #ff5733;">{{ event.description }}</p>'))
+          .addTo(map);
+
+        // Track the current map style
+        var isSatellite = false;
+
+        // Function to toggle the map style
+        window.toggleSatellite = function() {
+          if (isSatellite) {
+            map.setStyle('mapbox://styles/mapbox/streets-v11'); // Switch to street view
+          } else {
+            map.setStyle('mapbox://styles/mapbox/satellite-v9'); // Switch to satellite view
+          }
+          isSatellite = !isSatellite; // Toggle the state
+        }
+        
+      });
+    </script>
+    {% endif %}
+
+
+
+  </div>
+</div>
+<!-- Event Information Sidebar / RIGHT  side bar/div-->
+<div class="lg:col-4" data-aos="fade-up-sm" data-aos-delay="50">
+  <div class="relative min-h-full overflow-hidden overflow-x-hidden rounded-lg border border-white/5 bg-theme-dark p-4 flex flex-col items-center">
+    <!-- Image Container -->
+    <div class="w-full mb-4">
+      {% if event.get('external_links') and event['external_links'].get('image') %}
+        <img
+          src="{{ event['external_links']['image'] }}"
+          alt="{{ event.get('title', 'No Title Available') }}"
+          onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/no-photo.png') }}';"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-[200px] object-cover rounded-t-lg"
+        />
+      {% else %}
+        <img
+          src="{{ url_for('static', filename='images/no-photo.png') }}"
+          alt="{{ event.get('title', 'No Title Available') }}"
+          class="w-full h-[200px] object-cover rounded-t-lg"
+        />
+      {% endif %}
+    </div>
+    
+    <!-- Event Title and Description -->
+    <div class="text-center p-4 w-full">
+      <h3 class="text-2xl font-semibold mb-1">{{ event.title }}</h3>
+      <p class="text-sm opacity-70 mb-4">{{ event.category }}</p>
+      
+      <a
+      class="btn has-icon btn-primary"
+      href="{{ event.external_links.registration }}"
+      target="_blank"
+      rel="noopener noreferrer nofollow"
+    >
+      <span class="value"><span data-content="Register Now">Register Now</span></span>
+      <span class="icon">
+        <span>
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 320 512"
+            class="text-xs"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5 12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"
+            ></path>
+          </svg>
+        </span>
+      </span>
+    </a>
+    </div>
+    
+<!-- Modal Popup for Registration Confirmation -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="modal-title" id="registerModalLabel">Did you register for this event?</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-footer">
+        <form action="{{ url_for('register_event', event_id=event._id) }}" method="POST">
+          <button type="submit" class="btn btn-primary" style="color: #d63384;">Yes</button>
+        </form>
+        <button type="button" class="btn btn-secondary" style="color: #d63384;" data-bs-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- View Details Button -->
+    <a class="btn btn-inline mt-4 has-icon w-full text-center py-2 px-4 border-t border-gray-300" href="#" id="event-full-details" target="_blank">
+      
+    </a>
+  </div>
+</div>
+
+
+           
+          </div>
+        </div>
+      </section>
+      
+    </main>
+
+    <script>
+      // Show modal if user returns from registration tab
+      window.onload = function() {
+        if (document.referrer && document.referrer.includes("registration")) {
+          var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
+          registerModal.show();
+        }
+      };
+    </script>
+<script>
+  document.querySelector(".btn-primary").addEventListener("click", function(e) {
+    e.preventDefault();
+    
+    var eventId = "{{ event._id }}"; // Fetch the event ID dynamically
+    
+    fetch(`/register_event/${eventId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: JSON.stringify({ registered: true })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert('You are now registered for the event!');
+        window.location.reload(); // Reload the page after registration
+      } else {
+        alert('Registration failed. Try again later.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+</script>
+
+
+
+    <style>
+      .toggle-button {
+        
+        color: #d63384;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 5px;
+      }
+    
+    
+      .map-link {
+        color: #d63384;
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    
+      .map-link:hover {
+        color: #b12f6a; 
+      }
+    </style>
+
+    <style>
+      .text-center {
+  text-align: center;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.opacity-70 {
+  opacity: 0.7;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-[200px] {
+  height: 200px;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.border-t {
+  border-top: 1px solid #333;
+}
+    </style>
+
+
+<footer class="">
+  <div class="container" data-aos="fade-up-sm">
+    <div class="row gy-6 justify-between lg:g-10">
+      
+
+      <div class="col-12 pt-5 ">
+        <div class="flex flex-col md:flex-row justify-between border-t border-border pt-10 pb-5">
+          <div>
+            <p class="text-sm text-white/60">
+              Copyright © 2024 EventIQ. All Rights Reserved
+            </p>
+          </div>
+          <div>
+            <ul class="flex md:justify-end gap-4">
+              <li>
+                <a class="text-sm text-white/60 transition hover:text-secondary" href="#"
+                  
+                  >
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a class="text-sm text-white/60 transition hover:text-secondary" 
+                  href="#"
+                  >
+                  Terms &amp; Conditions
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+  </body>
+</html>
