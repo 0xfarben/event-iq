@@ -117,7 +117,7 @@ We used **Cosmocloud** for the following:
    - Event images and user profile pictures are uploaded to Cosmocloud's Object Storage.
    - A **GET** request to Cosmocloud retrieves the image URL, which is saved in MongoDB under the `profileImage` field for users or event images for events.
      
-### 3. **Embedding Generation:**
+### 4. **Embedding Generation:**
    - The project utilizes Gemini to generate embeddings for events and user interests. This process involves the following steps:
       
    - Data Preparation:
