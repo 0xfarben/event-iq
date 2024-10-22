@@ -80,6 +80,7 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 
 4. Set up Firebase Project:
    - Add your Firebase Projects information into firebase.json file.
+   - [Firebase](https://console.firebase.google.com/) for building the web framework.
 
 5. Set up Firebase SDK for your Project:
    - Add your Firebase SDK information into javascript section of the auth/latest-login.html and auth/latest-signup.html file.
@@ -87,11 +88,45 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 6. Set up MapBox Secret Key:
    - Add your MapBox Secret Key in javascript section of the events/details.html file.
 
-7. Set up the required Environment Variables
 
+### Firebase Setup
+1. **Create a Firebase Project**:
+   - Go to the [Firebase Console](https://console.firebase.google.com/).
+   - Click on "Add Project" and follow the on-screen instructions.
+
+2. **Add a Web App**:
+   - In your Firebase project, click on the web icon (</>) to register your app.
+   - Follow the instructions to get your Firebase configuration details.
+
+3. **Enable Authentication**:
+   - In the Firebase console, navigate to "Authentication" and enable the sign-in methods you want (e.g., Email/Password, Google).
+
+### Firebase Admin SDK Setup
+1. **Install Firebase Admin SDK**:
+   - In your project directory, run the following command:
+     ```bash
+     pip install firebase-admin
+     ```
+
+2. **Service Account Key**:
+   - In the Firebase Console, go to "Project Settings" > "Service Accounts".
+   - Click on "Generate New Private Key" and download the JSON file.
+   - Place this file in your project directory.
+
+3. **Initialize Firebase Admin SDK**:
+   - In your Python code, initialize the Firebase Admin SDK with the service account key:
+   ```python
+   import firebase_admin
+   from firebase_admin import credentials
+
+   cred = credentials.Certificate('path/to/your/service-account-file.json')
+   firebase_admin.initialize_app(cred)
+
+
+7. Set up the required Environment Variables
    - Create a ```.env``` file in the root directory and add the following environment variables:
 
-    ``` env
+    ``` python
     PROJECT_ID = 
     ENVIRONMENT_ID = 
     SECRET_KEY = 
