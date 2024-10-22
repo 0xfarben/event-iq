@@ -22,13 +22,13 @@ PROJECT_ID = os.getenv("PROJECT_ID")
 ENVIRONMENT_ID = os.getenv("ENVIRONMENT_ID")
 MONGO_PASSWORD = os.getenv("MONGO_PASS")
 
-client = MongoClient(f"mongodb+srv://cosmocloud-development:{MONGO_PASSWORD}@cluster0.ppdp4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+client = MongoClient("") # Replace with your MongoDB Connection URL
 db = client['EventIQ']
 collection = db['TestingEmbedding']
 users_collection = db['TestingUsers']
 fs = gridfs.GridFS(db)
 
-cred = credentials.Certificate(r"F:\CosmoCloud-Project\eventiq\firebase.json")
+cred = credentials.Certificate(r"path\to\\firebase.json")
 firebase_admin.initialize_app(cred)
 
 app = Flask("Event IQ Google Login")
@@ -155,44 +155,6 @@ def event_detail(event_id):
     except requests.exceptions.RequestException as e:
         print(f"Error fetching event from Cosmocloud: {e}")
         return jsonify({"Noddata": 404})
-
-# @app.route('/search-events')
-# def search_events():
-#     query = request.args.get('query', '').strip() or None
-
-#     events = []
-#     if query:
-#         # Define Cosmocloud API endpoint and query parameters
-#         query_params = {
-#             "query": query,
-#             "limit": 20,
-#             "offset": 0
-#         }
-#         headers = {
-#             'Content-Type': 'application/json',
-#             'projectId': PROJECT_ID,
-#             'environmentId': ENVIRONMENT_ID
-#         }
-#         cosmo_vector_search = "https://free-ap-south-1.cosmocloud.io/development/api/testingembedding/_search"
-#         try:
-#             # Make the GET request to Cosmocloud API
-#             response = requests.get(url=cosmo_vector_search, headers=headers, params=query_params)
-#             response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
-#             response_data  = response.json()
-#             # events = response.json().get("data", [])
-            
-#             totalEventCount = 0  # Set default value for totalEventCount
-#             if response_data and isinstance(response_data, list):
-#                 if "data" in response_data[0]:
-#                     events = response_data[0]["data"]
-
-#         except requests.exceptions.RequestException as e:
-#             print(f"Error fetching events from Cosmocloud: {e}")
-#             events = []
-#             totalEventCount = 0  # Default value in case of an exception
-
-#     # Render the search results in the template
-#     return render_template('events/search.html', events=events, query=query)
 
 @app.route('/search-events')
 def search_events():
