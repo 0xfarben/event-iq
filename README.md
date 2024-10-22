@@ -125,7 +125,7 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
     };
     
     firebase.initializeApp(firebaseConfig);
-    ```
+   ```
 
 ### MapBox Setup
 4.1. **Create a MapBox Account**:
