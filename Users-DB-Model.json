@@ -1,0 +1,73 @@
+{
+    "name": "john_doe",
+    "email": "john.doe@example.com",
+    "profile_image": "https://example.com/images/john.jpg",
+    "country": "USA",
+    "auth_provider": "google",
+    "password": "$2a$12$7n1f.../hashed_password",
+    "created_at": "2023-10-01T10:00:00Z",
+    "user_interests": ["technology", "sports", "music"],
+    "registered_events": [
+        {
+            "event_id": "6543210987abcdef98765432",
+            "event_name": "Tech Conference 2024",
+            "event_date": "2024-06-15T09:00:00Z",
+            "event_location": "New York, USA",
+            "status": "confirmed"
+        },
+        {
+            "event_id": "0987654321abcdef12345678",
+            "event_name": "Music Festival",
+            "event_date": "2024-08-20T18:00:00Z",
+            "event_location": "Los Angeles, USA",
+            "status": "pending"
+        }
+    ]
+}
+
+/newone
+{
+    "name": "john_doe",
+    "email": "john.doe@example.com",
+    "profile_image": "https://example.com/images/john.jpg",
+    "country": "USA",
+    "auth_provider": "google",
+    "password": "$2a$12$7n1f.../hashed_password",
+    "created_at": "2023-10-01T10:00:00Z",
+    "user_interests": ["technology", "sports", "music"],
+    "registered_events": [
+        {
+         "event_id": "670d9020576f282bfaffd6e1",
+    "title": "The Startup Club - Networking Meet",
+    "description": "Monthly networking meet for members to connect, discuss initiatives, and explore collaborations.  Session recording will be posted on YouTube.",
+    "category": "Career & Business",
+    "date": {
+        "start_date": "2024-10-27T11:00:00+05:30",
+        "end_date": "2024-10-27T12:00:00+05:30"
+    },
+    "location": {
+        "venue": "Online event",
+        "city": "Chennai",
+        "country": "IN",
+        "coordinates": {
+            "latitude": -8.521147,
+            "longitude": 179.1962
+        },
+        "map_link": "N/A"
+    },
+    "price": 0.0,
+    "available_tickets": 0,
+    "organizer": {
+        "name": "The Startup Club - India",
+        "contact_email": "N/A"
+    },
+    "registration_status": "JOIN_OPEN",
+    "external_links": {
+        "registration": "https://www.meetup.com/the-startup-club/events/301394878/",
+        "linkedin_event": "N/A",
+        "image": "https://secure.meetupstatic.com/photos/event/e/a/2/5/600_514439941.jpeg"
+    }
+        }
+        
+    ]
+}
