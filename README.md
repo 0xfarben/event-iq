@@ -116,19 +116,19 @@ We used **Cosmocloud** for the following:
 ### 3. **Object Storage:**
    - Event images and user profile pictures are uploaded to Cosmocloud's Object Storage.
    - A **GET** request to Cosmocloud retrieves the image URL, which is saved in MongoDB under the `profileImage` field for users or event images for events.
-   - 
+     
 ### 3. **Embedding Generation:**
    - The project utilizes Gemini to generate embeddings for events and user interests. This process involves the following steps:
       
-Data Preparation:
-Relevant data points, such as event descriptions, categories, and user interests, are collected and preprocessed. This may include tokenization, normalization, and vectorization to ensure that the input data is in a suitable format for the embedding generation process.
-The preprocessed data is fed into the Gemini model, which leverages advanced natural language processing (NLP) techniques to transform this information into numerical vectors (embeddings). Each embedding captures the semantic meaning and context of the data, allowing for a more nuanced understanding of events and user preferences.
+   - Data Preparation:
+    Relevant data points, such as event descriptions, categories, and user interests, are collected and preprocessed. This may include tokenization, normalization, and vectorization to ensure that the input data is in a suitable format for the embedding generation process.
+    The preprocessed data is fed into the Gemini model, which leverages advanced natural language processing (NLP) techniques to transform this information into numerical vectors (embeddings). Each embedding captures the semantic meaning and context of the data, allowing      for a more nuanced understanding of events and user preferences.
 
-Integration with Search and Recommendation Systems:
-Once generated, these embeddings are stored in the database and used to enhance search functionality and personalized recommendations. When a user searches for events or expresses their interests, the system can match the user’s embedding against event embeddings, identifying the most relevant and personalized options based on the underlying patterns in the data.
+  - Integration with Search and Recommendation Systems:
+    Once generated, these embeddings are stored in the database and used to enhance search functionality and personalized recommendations. When a user searches for events or expresses their interests, the system can match the user’s embedding against event embeddings,         identifying the most relevant and personalized options based on the underlying patterns in the data.
 
-Continuous Improvement:
-As more user interactions and event data accumulate, the embeddings can be regularly updated, allowing the system to learn and adapt over time, further improving the accuracy of search results and recommendations.
+  - Continuous Improvement:
+    As more user interactions and event data accumulate, the embeddings can be regularly updated, allowing the system to learn and adapt over time, further improving the accuracy of search results and recommendations.
 
 ---
 
