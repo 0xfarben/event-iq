@@ -76,6 +76,11 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 1.3. Set up MongoDB and Cosmocloud configurations:
    - Add your MongoDB connection URI in the environment variables or config file.
    - Add your Cosmocloud API credentials (`projectId`, `environmentId`).
+   - The TestingEmbedding and TestingUsers refers to the Events && Users database respectively.
+
+1.4. Set up Cosmocloud Database Models:
+   - Create A DB Model of Events, use the ```ScrapingEvents/DB-Model-EventsCollection.json``` file schema. Create All CRUD APIs for same Event's DB Model.
+   - Create A DB Model of Users, use the ```Users-DB-Model.json``` file schema. Create All CRUD APIs for same User's DB Model.
    - The TestingEmbedding and TestingUsers refers to the Events, users database respectively.
 
 ### Firebase Setup
