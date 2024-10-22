@@ -62,58 +62,47 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 - Cosmocloud account
 
 ### Setup:
-1. Clone the repository:
+1.1. Clone the repository:
    ```bash
    git clone https://github.com/0xfarben/event-iq.git
    cd event-iq
    ```
 
-2. Install dependencies:
+1.2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Set up MongoDB and Cosmocloud configurations:
+1.3. Set up MongoDB and Cosmocloud configurations:
    - Add your MongoDB connection URI in the environment variables or config file.
    - Add your Cosmocloud API credentials (`projectId`, `environmentId`).
    - The TestingEmbedding and TestingUsers refers to the Events, users database respectively.
 
-4. Set up Firebase Project:
-   - Add your Firebase Projects information into firebase.json file.
-   - [Firebase](https://console.firebase.google.com/) for building the web framework.
-
-5. Set up Firebase SDK for your Project:
-   - Add your Firebase SDK information into javascript section of the auth/latest-login.html and auth/latest-signup.html file.
-
-6. Set up MapBox Secret Key:
-   - Add your MapBox Secret Key in javascript section of the events/details.html file.
-
-
 ### Firebase Setup
-1. **Create a Firebase Project**:
+2.1. **Create a Firebase Project**:
    - Go to the [Firebase Console](https://console.firebase.google.com/).
    - Click on "Add Project" and follow the on-screen instructions.
 
-2. **Add a Web App**:
+2.2. **Add a Web App**:
    - In your Firebase project, click on the web icon (</>) to register your app.
    - Follow the instructions to get your Firebase configuration details.
 
-3. **Enable Authentication**:
+2.3. **Enable Authentication**:
    - In the Firebase console, navigate to "Authentication" and enable the sign-in methods you want (e.g., Email/Password, Google).
 
 ### Firebase Admin SDK Setup
-1. **Install Firebase Admin SDK**:
+3.1. **Install Firebase Admin SDK**:
    - In your project directory, run the following command:
      ```bash
      pip install firebase-admin
      ```
 
-2. **Service Account Key**:
+3.2. **Service Account Key**:
    - In the Firebase Console, go to "Project Settings" > "Service Accounts".
    - Click on "Generate New Private Key" and download the JSON file.
    - Place this file in your project directory.
 
-3. **Initialize Firebase Admin SDK**:
+3.3. **Initialize Firebase Admin SDK**:
    - In your Python code, initialize the Firebase Admin SDK with the service account key:
    ```python
    import firebase_admin
@@ -121,9 +110,52 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 
    cred = credentials.Certificate('path/to/your/service-account-file.json')
    firebase_admin.initialize_app(cred)
+   ```
 
+   - Add your Firebase SDK information into javascript section of the auth/latest-login.html and auth/latest-signup.html file.
+   - Use the following configuration in your application (auth/latest-login.html && auth/latest-signup.html) to access Firebase services:
+   ```javascript
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+    
+    firebase.initializeApp(firebaseConfig);
+    ```
 
-7. Set up the required Environment Variables
+### MapBox Setup
+4.1. **Create a MapBox Account**:
+   Go to the MapBox website and sign up for a free account.
+   
+4.2. **Create a New MapBox Token**:
+   - Once logged in, navigate to your account dashboard.
+   - Click on "Tokens" in the sidebar.
+   - Click on "Create a Token" and give it a name (e.g., "Event IQ Token").
+   - Set the token's permissions according to your needs and save it.
+     
+4.3. **Integrate MapBox in Your Application**:
+
+   - Add the MapBox GL JS library to your HTML:
+    ``` html
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css' rel='stylesheet'/>
+    ```
+   - Initialize MapBox with your token in your JavaScript code:
+    ```javascript
+    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+    const map = new mapboxgl.Map({
+        container: 'map', // ID of the HTML element to display the map
+        style: 'mapbox://styles/mapbox/streets-v11', // Map style
+        center: [longitude, latitude], // Starting position [lng, lat]
+        zoom: 12 // Starting zoom level
+    });
+    ```
+    
+1.4. Set up the required Environment Variables
    - Create a ```.env``` file in the root directory and add the following environment variables:
 
     ``` python
@@ -133,7 +165,7 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
     MONGO_PASS = 
     ```
 
-8. Start the Flask app:
+1.5. Start the Flask app:
    ```bash
    python main.py
    ```
