@@ -1,26 +1,6 @@
-![eventiq](https://github.com/user-attachments/assets/78b24131-0a5f-4b05-97b5-18051b7a6a9b)
 # Event IQ: AI-Powered Personalized Event Management Platform
 
-![Uploading eventiq.s<svg xmlns="http://www.w3.org/2000/svg" width="149" height="32" fill="none">
-  <!-- Main Logo Text -->
-  <text x="40" y="22.9" font-family="Arial, sans-serif" font-size="25" font-weight="500" fill="#FFFFFF">
-    Event IQ
-  </text>
-
-  <!-- Additional Decorative Elements -->
-  <g clip-path="url(#a)">
-    <path fill="#C0007A" d="M30.998 14.186h-11.78l8.37-8.512-2.17-2.206-8.369 8.511V0h-3.1v11.98L5.58 3.467 3.41 5.674l8.37 8.512H0v3.152h11.78L3.41 25.85l2.17 2.207 8.37-8.512v11.98h3.099v-11.98l8.37 8.512 2.17-2.207-8.37-8.512h11.78v-3.152z"/>
-  </g>
-
-  <!-- Clip Path Definition -->
-  <defs>
-    <clipPath id="">
-      <path fill="#fff" d="M0 0h30.998v31.524H0z"/>
-    </clipPath>
-  </defs>
-</svg>
-vg…]()
-
+![eventiq](https://github.com/user-attachments/assets/78b24131-0a5f-4b05-97b5-18051b7a6a9b)
 
 
 Event IQ is an AI-driven platform designed to help users discover, organize, and manage tech events tailored to their interests. It integrates a powerful backend, personalized recommendations, and automated event management, making it easy to navigate the tech event space.
