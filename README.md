@@ -72,10 +72,11 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 3. Set up MongoDB and Cosmocloud configurations:
    - Add your MongoDB connection URI in the environment variables or config file.
    - Add your Cosmocloud API credentials (`projectId`, `environmentId`).
+   - The TestingEmbedding and TestingUsers refers to the Events, users database respectively.
 
 4. Start the Flask app:
    ```bash
-   flask run
+   python main.py
    ```
 
 ---
