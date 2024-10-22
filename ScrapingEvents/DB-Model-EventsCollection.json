@@ -1,0 +1,55 @@
+{
+    "title": "Tech Equity Collective Innovate",
+    "description": "An immersive event for aspiring Black developers, focusing on tech advancements, career pathways, and community connections.",
+    "category": "Technology",
+    "date": {
+        "start_date": "October 28, 2024",
+        "end_date": "October 29, 2024"
+    },
+    "location": {
+        "venue": "Google NYC",
+        "city": "New York City",
+        "country": "USA",
+        "coordinates": {
+            "latitude": 120.05,
+            "longitude": -1230.02
+        },
+        "map_link": "N/A"
+    },
+    "price": 100.2,
+    "available_tickets": 0,
+    "organizer": {
+        "name": "Tech Equity Collective",
+        "contact_email": "N/A"
+    },
+    "registration_status": "Open",
+    "external_links": {
+        "registration": "https://mlt.avature.net/TECAppLandingPage",
+        "linkedin_event": "N/A",
+        "image": "https://img.youtube.com/vi/OJk0m1A3IAg/maxresdefault.jpg"
+    },
+    "speakers": [
+        {
+            "name": "Alice Johnson",
+            "title": "Chief Technology Officer",
+            "company": "Innovatech",
+            "bio": "heloo"
+        },
+        {
+            "name": "Alice Johnson",
+            "title": "Chief Technology Officer",
+            "company": "Innovatech",
+            "bio": "heloo"
+        }
+    ],
+    "tags": [
+        "Black professionals",
+        "tech jobs",
+        "diversity in tech",
+        "Atlanta tech",
+        "entrepreneurship"
+    ],
+    "created_at": "N/A",
+    "updated_at": "N/A",
+    "detailsEmbeddings": [1.23, 1.23]
+}
