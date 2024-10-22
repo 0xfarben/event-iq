@@ -1,0 +1,164 @@
+@media screen and (max-width: 1280px) {
+  .email-header {
+    height: auto;
+  }
+  .email-content {
+    padding: 100px 0 0 0;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .email-header {
+    border-top-left-radius: 0.25rem;
+  }
+  .email-sidebar {
+    left: -280px;
+  }
+  .email-content {
+    margin-left: 0;
+  }
+  .email-header {
+    left: 0;
+  }
+  .email-toggled .email-sidebar {
+    left: 0;
+  }
+  .email-toggled .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 250px;
+    background: #000;
+    opacity: 0.5;
+    z-index: 9;
+    display: block;
+    cursor: move;
+    transition: all 0.3s ease-out;
+  }
+  .chat-header {
+    border-top-left-radius: 0.25rem;
+  }
+  .chat-footer {
+    border-bottom-left-radius: 0.25rem;
+  }
+  .chat-sidebar {
+    left: -370px;
+  }
+  .chat-content {
+    margin-left: 0;
+  }
+  .chat-header {
+    left: 0;
+  }
+  .chat-footer {
+    left: 0;
+  }
+  .chat-toggled .chat-sidebar {
+    left: 0;
+  }
+  .chat-toggled .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 340px;
+    background: #000;
+    opacity: 0.5;
+    z-index: 11;
+    display: block;
+    cursor: move;
+    transition: all 0.3s ease-out;
+  }
+}
+/* Toogle in responsive */
+@media only screen and (max-width: 1199px) {
+  .table-responsive {
+    white-space: nowrap;
+  }
+  .sidebar-wrapper {
+    left: -260px;
+  }
+  .sidebar-wrapper .sidebar-header .sidebar-close {
+    display: flex;
+  }
+  .top-header .navbar {
+    left: 0;
+  }
+  .page-content {
+    margin-left: 0;
+  }
+  .toggled .sidebar-wrapper {
+    width: 260px;
+    left: 0px;
+  }
+  .toggled .sidebar-wrapper .sidebar-header {
+    width: 260px;
+  }
+  .toggled .sidebar-wrapper .sidebar-bottom {
+    width: 260px;
+  }
+  .toggled .logo-name {
+    display: block;
+  }
+  .toggled .top-header .navbar {
+    left: 0px;
+  }
+  .toggled .page-footer {
+    left: 0px;
+  }
+  .toggled .main-wrapper {
+    margin-left: 0;
+  }
+  .toggled .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.5;
+    z-index: 11;
+    display: block;
+    cursor: move;
+    transition: all 0.23s ease-out;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  .top-header .navbar {
+    left: 0;
+  }
+  .top-header .navbar .dropdown {
+    position: static;
+  }
+  .top-header .navbar .dropdown .dropdown-menu {
+    width: 100%;
+  }
+  .top-header .navbar .dropdown .dropdown-menu::after {
+    display: none;
+  }
+  .top-header .navbar .mega-menu-widgets {
+    padding: 1rem;
+    position: relative;
+    height: 480px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .main-wrapper {
+    margin-left: 0;
+  }
+  /*page footer*/
+  .page-footer {
+    left: 0px;
+  }
+  /*mini sidebar*/
+  .mini-sidebar {
+    left: -70px;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .search-popup {
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 10;
+  }
+}/*# sourceMappingURL=responsive.css.map */
