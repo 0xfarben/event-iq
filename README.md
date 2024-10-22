@@ -78,7 +78,16 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
    - Add your Cosmocloud API credentials (`projectId`, `environmentId`).
    - The TestingEmbedding and TestingUsers refers to the Events, users database respectively.
 
-4. Set up the required Environment Variables
+4. Set up Firebase Project:
+   - Add your Firebase Projects information into firebase.json file.
+
+5. Set up Firebase SDK for your Project:
+   - Add your Firebase SDK information into javascript section of the auth/latest-login.html and auth/latest-signup.html file.
+
+6. Set up MapBox Secret Key:
+   - Add your MapBox Secret Key in javascript section of the events/details.html file.
+
+7. Set up the required Environment Variables
 
    - Create a ```.env``` file in the root directory and add the following environment variables:
 
@@ -89,7 +98,7 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
     MONGO_PASS = 
     ```
 
-5. Start the Flask app:
+8. Start the Flask app:
    ```bash
    python main.py
    ```
