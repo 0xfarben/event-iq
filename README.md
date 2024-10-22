@@ -58,7 +58,7 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 ### Setup:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/event-iq.git
+   git clone https://github.com/0xfarben/event-iq.git
    cd event-iq
    ```
 
