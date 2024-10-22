@@ -80,14 +80,14 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 
 4. Set up the required Environment Variables
 
-- Create a ```.env``` file in the root directory and add the following environment variables:
+   - Create a ```.env``` file in the root directory and add the following environment variables:
 
-``` env
-PROJECT_ID = 
-ENVIRONMENT_ID = 
-SECRET_KEY = 
-MONGO_PASS = 
-```
+    ``` env
+    PROJECT_ID = 
+    ENVIRONMENT_ID = 
+    SECRET_KEY = 
+    MONGO_PASS = 
+    ```
 
 5. Start the Flask app:
    ```bash
