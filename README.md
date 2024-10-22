@@ -93,6 +93,7 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 ### Firebase Admin SDK Setup
 3.1. **Install Firebase Admin SDK**:
    - In your project directory, run the following command:
+     
      ```bash
      pip install firebase-admin
      ```
@@ -140,12 +141,12 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 4.3. **Integrate MapBox in Your Application**:
 
    - Add the MapBox GL JS library to your HTML:
-    ``` html
+  ``` html
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css' rel='stylesheet'/>
-    ```
+  ```
    - Initialize MapBox with your token in your JavaScript code:
-    ```javascript
+  ```javascript
     mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
     const map = new mapboxgl.Map({
         container: 'map', // ID of the HTML element to display the map
@@ -153,17 +154,17 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
         center: [longitude, latitude], // Starting position [lng, lat]
         zoom: 12 // Starting zoom level
     });
-    ```
+  ```
     
 1.4. Set up the required Environment Variables
    - Create a ```.env``` file in the root directory and add the following environment variables:
 
-    ``` python
+  ``` python
     PROJECT_ID = 
     ENVIRONMENT_ID = 
     SECRET_KEY = 
     MONGO_PASS = 
-    ```
+  ```
 
 1.5. Start the Flask app:
    ```bash
