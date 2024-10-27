@@ -1392,24 +1392,69 @@ function At(t) {
         sourceElement: e,
       }));
   }),
-  document.addEventListener("submit", (t) => {
-    let e = t.target;
-    if (e.tagName !== "FORM" || t.defaultPrevented || At(e)) return;
-    const n = e,
-      o = t.submitter,
-      r = new FormData(n, o),
-      i = typeof n.action == "string" ? n.action : n.getAttribute("action"),
-      l = typeof n.method == "string" ? n.method : n.getAttribute("method");
-    let u = o?.getAttribute("formaction") ?? i ?? location.pathname;
-    const v = o?.getAttribute("formmethod") ?? l ?? "get";
-    if (v === "dialog" || location.origin !== new URL(u, location.href).origin)
+  // document.addEventListener("submit", (t) => {
+  //   let e = t.target;
+  //   if (e.tagName !== "FORM" || t.defaultPrevented || At(e)) return;
+  //   const n = e,
+  //     o = t.submitter,
+  //     r = new FormData(n, o),
+  //     i = typeof n.action == "string" ? n.action : n.getAttribute("action"),
+  //     l = typeof n.method == "string" ? n.method : n.getAttribute("method");
+  //   let u = o?.getAttribute("formaction") ?? i ?? location.pathname;
+  //   const v = o?.getAttribute("formmethod") ?? l ?? "get";
+  //   if (v === "dialog" || location.origin !== new URL(u, location.href).origin)
+  //     return;
+  //   const c = { sourceElement: o ?? n };
+  //   if (v === "get") {
+  //     const d = new URLSearchParams(r),
+  //       a = new URL(u);
+  //     (a.search = d.toString()), (u = a.toString());
+  //   } else c.formData = r;
+  //   t.preventDefault(), Tt(u, c);
+  // }),
+
+  document.addEventListener("submit", (event) => {
+    let form = event.target;
+  
+    // Check if the event is triggered by a form
+    if (form.tagName !== "FORM" || event.defaultPrevented) return;
+  
+    // Check if the form is your specific signup form by ID
+    if (form.id === "signup-form") {
+      // Allow default form submission for the signup form
       return;
-    const c = { sourceElement: o ?? n };
-    if (v === "get") {
-      const d = new URLSearchParams(r),
-        a = new URL(u);
-      (a.search = d.toString()), (u = a.toString());
-    } else c.formData = r;
-    t.preventDefault(), Tt(u, c);
+    }
+    if (form.id === "login-form") {
+      // Allow default form submission for the signup form
+      return;
+    }
+  
+    // If not the signup/login form, proceed with custom handling
+    const submitter = event.submitter;
+    const formData = new FormData(form, submitter);
+    let actionUrl = typeof form.action === "string" ? form.action : form.getAttribute("action");
+    let method = typeof form.method === "string" ? form.method : form.getAttribute("method");
+  
+    // Check for custom 'formaction' or 'formmethod' attributes
+    let url = submitter?.getAttribute("formaction") ?? actionUrl ?? location.pathname;
+    const formMethod = submitter?.getAttribute("formmethod") ?? method ?? "get";
+  
+    if (formMethod === "dialog" || location.origin !== new URL(url, location.href).origin) return;
+  
+    const requestOptions = { sourceElement: submitter ?? form };
+  
+    if (formMethod === "get") {
+      const searchParams = new URLSearchParams(formData);
+      const urlObject = new URL(url);
+      urlObject.search = searchParams.toString();
+      url = urlObject.toString();
+    } else {
+      requestOptions.formData = formData;
+    }
+  
+    // Prevent default form submission for other forms
+    event.preventDefault();
+    Tt(url, requestOptions);
   }),
+
   de({ prefetchAll: !0 }));
