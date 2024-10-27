@@ -55,6 +55,7 @@ Event IQ is an AI-driven platform designed to help users discover, organize, and
 ---
 
 ## Installation
+Note: Setting up the Cosmocloud API backend may be a bit confusing. Please feel free to contact me if you encounter any issues during the installation process.
 
 ### Prerequisites:
 - Python 3.8 or higher
