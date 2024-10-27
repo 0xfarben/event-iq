@@ -120,7 +120,9 @@
               <div style="color: green; font-weight: bold;">{{ success }}</div>
               {% endif %}
 
-              <form action="{{ url_for('signup') }}" method="POST" enctype="multipart/form-data">
+              <!-- <form action="{{ url_for('signup') }}" method="POST" enctype="multipart/form-data"> -->
+              <form id="signup-form" action="{{ url_for('signup') }}" method="POST" enctype="multipart/form-data">
+
                 <div class="form-group mb-4">
                   <input type="text" placeholder="Full Name" class="form-input" name="name" required />
                 </div>
@@ -171,13 +173,13 @@
     import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 
     const firebaseConfig = {
-      apiKey: "",
-      authDomain: "",
-      projectId: "",
-      storageBucket: "",
-      messagingSenderId: "",
-      appId: "",
-      measurementId: ""
+      apiKey: "AIzaSyAEXhRJX8Skn9iBQszguG3oIyPUXVE6n9s",
+      authDomain: "evntiq-61f75.firebaseapp.com",
+      projectId: "evntiq-61f75",
+      storageBucket: "evntiq-61f75.appspot.com",
+      messagingSenderId: "20604553038",
+      appId: "1:20604553038:web:dd0fd913bcf20d095d801f",
+      measurementId: "G-6RFJXQFPWN"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -185,6 +187,7 @@
 
     // Sign-in with Google function
     window.signInWithGoogle = async function () {
+      console.log("Im in login controller")
       const provider = new GoogleAuthProvider();
       try {
         const result = await signInWithPopup(auth, provider);
