@@ -2,6 +2,29 @@
 <html lang="en">
 <head>
   <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" />
+  <script>
+    window.onload = function () {
+      console.log("Script loaded");  // Debugging step to ensure the script runs
+  
+      // Fetch error and success messages passed from Flask
+      const errorMessage = "{{ error|tojson }}";
+      const successMessage = "{{ success|tojson }}";
+  
+      // Debugging prints
+      console.log("Error message from server:", errorMessage);
+      console.log("Success message from server:", successMessage);
+  
+      // Show error popup if there's an error
+      if (errorMessage && errorMessage !== "null") {
+        alert(errorMessage);
+      }
+  
+      // Show success popup if there's a success message
+      if (successMessage && successMessage !== "null") {
+        alert(successMessage);
+      }
+    };
+  </script>
   <style>
     @font-face {
       unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
@@ -90,17 +113,16 @@
               <h1 class="text-2xl font-semibold mb-6 text-center">Log In</h1>
 
 
-              {% with messages = get_flashed_messages() %}
-              {% if messages %}
-              <div id="flash-message" class="alert alert-warning">
-                {% for message in messages %}
-                <p class="text-red-500 text-center">{{ message }}</p>
-                {% endfor %}
-              </div>
+              {% if error %}
+              <div style="color: red; font-weight: bold;">{{ error }}</div>
               {% endif %}
-              {% endwith %}
 
-              <form action="{{ url_for('login') }}" method="POST">
+              <!-- Display success message on the page for debugging (if needed) -->
+              {% if success %}
+              <div style="color: green; font-weight: bold;">{{ success }}</div>
+              {% endif %}
+
+              <form id="login-form" action="{{ url_for('login') }}" method="POST">
                 <div class="form-group mb-4">
                   <input type="email" placeholder="Email" class="form-input" name="email" required>
                 </div>
@@ -111,6 +133,7 @@
                   Login
                 </button>
               </form>
+              
 
               <br>
 
@@ -154,13 +177,13 @@
     import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 
     const firebaseConfig = {
-      apiKey: "",
-      authDomain: "",
-      projectId: "",
-      storageBucket: "",
-      messagingSenderId: "",
-      appId: "",
-      measurementId: ""
+      apiKey: "AIzaSyAEXhRJX8Skn9iBQszguG3oIyPUXVE6n9s",
+      authDomain: "evntiq-61f75.firebaseapp.com",
+      projectId: "evntiq-61f75",
+      storageBucket: "evntiq-61f75.appspot.com",
+      messagingSenderId: "20604553038",
+      appId: "1:20604553038:web:dd0fd913bcf20d095d801f",
+      measurementId: "G-6RFJXQFPWN"
     };
 
     const app = initializeApp(firebaseConfig);
