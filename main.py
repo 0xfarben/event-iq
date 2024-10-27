@@ -5,7 +5,6 @@ import requests
 import firebase_admin
 from flask import flash
 from bson import ObjectId
-from flask import Response
 from functools import wraps
 from datetime import datetime
 from dotenv import load_dotenv
@@ -16,22 +15,23 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 load_dotenv()
 
+
 app = Flask(__name__)
 COSMOCLOUD_API_URL = "https://free-ap-south-1.cosmocloud.io/development/api/testingembedding"
 PROJECT_ID = os.getenv("PROJECT_ID")
 ENVIRONMENT_ID = os.getenv("ENVIRONMENT_ID")
 MONGO_PASSWORD = os.getenv("MONGO_PASS")
 
-client = MongoClient("") # Replace with your MongoDB Connection URL
+client = MongoClient(f"mongodb+srv://cosmocloud-development:{MONGO_PASSWORD}@cluster0.ppdp4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client['EventIQ']
 collection = db['TestingEmbedding']
 users_collection = db['TestingUsers']
 fs = gridfs.GridFS(db)
 
-cred = credentials.Certificate(r"path\to\\firebase.json")
+cred = credentials.Certificate(r"F:\path\to\firebase.json")
 firebase_admin.initialize_app(cred)
 
-app = Flask("Event IQ Google Login")
+app = Flask("Event IQ")
 app.secret_key =  os.getenv("SECRET_KEY")
 
 def format_datetime(datetime_str):
@@ -159,13 +159,15 @@ def event_detail(event_id):
 @app.route('/search-events')
 def search_events():
     query = request.args.get('query', '').strip() or None
-
+    print(query)
     events = []
     if query:
         # Define Cosmocloud API endpoint and query parameters
+        print("in query")
         query_params = {
             "query": query,
-            "limit": 20,
+            "limit": 10, #this limits, only 10 events  are returned
+
             "offset": 0
         }
         headers = {
@@ -183,7 +185,7 @@ def search_events():
             if response_data and isinstance(response_data, list):
                 if "data" in response_data[0]:
                     events = response_data[0]["data"]
-
+            print("events got")
         except requests.exceptions.RequestException as e:
             print(f"Error fetching events from Cosmocloud: {e}")
             events = []
@@ -206,7 +208,9 @@ def login():
     if request.method == 'POST':
         print("Inside Login POST")
         email = request.form['email']
+        print(email)
         password = request.form['password']
+        print(password)
 
         # Fetch the user from Cosmocloud by email
         headers = {
@@ -216,17 +220,21 @@ def login():
         }
         cosmo_url_for_email_check = f'https://free-ap-south-1.cosmocloud.io/development/api/testingusers/findUserByEmail'
         response = requests.get(url=cosmo_url_for_email_check, headers=headers, params={"email": email})
+        print(response.status_code)
 
         if response.status_code == 200:
+            print("Inside response of login")
             user = response.json()  # Get the user data from the response
+            print(user)
 
             # Check if the user signed up via Google
             if user.get('auth_provider') == 'google':
-                flash('This account is registered using Google. Please log in with Google.', 'error')
-                return redirect(url_for('login'))
+                print("Auth google === true")
+                return render_template('auth/latest-login.html', error="This account is registered using Google. Please log in with Google.", success=None)
 
             # Check the user's password if they signed up with email/password
             if user.get('auth_provider') == 'normal':
+                print("Auth normal === true")
                 if check_password_hash(user.get('password'), password):  # Ensure 'password' is included in the response
                     # Store the sanitized user data in the session
                     session['user'] = {
@@ -242,35 +250,59 @@ def login():
                         return redirect(url_for('dashboard'))  # Redirect to dashboard if interests exist
                     else:
                         return redirect(url_for('dashboard'))  # Redirect to save-interests/dashboard if no interests 
-
                 else:
-                    flash('Invalid password, please try again.', 'error')
+                    return render_template('auth/latest-login.html', error="Invalid password, please try again.", success=None)
             else:
-                flash('User not found, please check your email or register.', 'error')
+                return render_template('auth/latest-login.html', error="User not found, please check your email or register.", success=None)
         else:
-            flash('User not found', 'error')
-    
-    return render_template('auth/latest-login.html')  # Render the login page if it's a GET request
+            return render_template('auth/latest-login.html', error="User not found.", success=None)
+
+    print("Inside Login GET")
+    return render_template('auth/latest-login.html', error=None, success=None)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    print(f"Request method: {request.method}")
     if request.method == 'POST':
+        print("Inside SIGNUP POST")
         # Get form data
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
         country = request.form['country']
 
-        # Check if the user with this email already exists and has signed up using Google
-        existing_user = users_collection.find_one({'email': email})
+        # Prepare request headers for Cosmocloud
+        headers = {
+            'Content-Type': 'application/json',
+            'projectId': PROJECT_ID,
+            'environmentId': ENVIRONMENT_ID
+        }
 
-        if existing_user:
+        # Check if user exists in Cosmocloud by email
+        cosmo_url_for_email_check = 'https://free-ap-south-1.cosmocloud.io/development/api/testingusers/findUserByEmail'
+        response = requests.get(url=cosmo_url_for_email_check, headers=headers, params={"email": email})
+        
+        print(f"Cosmocloud response code: {response.status_code}")
+        
+        if response.status_code == 200:
+            # User found in Cosmocloud
+            existing_user = response.json()
             if existing_user.get('auth_provider') == 'google':
-                print("inside this check")
                 # If the user has signed up using Google, prevent signup with the same email
-                return render_template('auth/latest-signup.html', error="This email is already registered using Google. Please log in with Google.", success=None)
-
+                return render_template(
+                    'auth/latest-signup.html',
+                    error="This email is already registered using Google. Please log in with Google.",
+                    success=None
+                )
+            elif existing_user.get('auth_provider') == 'normal':
+                # If the user has signed up with normal credentials
+                return render_template(
+                    'auth/latest-signup.html',
+                    error="This email is already registered. Please log in with your credentials.",
+                    success=None
+                )
+        
         # Handle file upload (profile image)
         file = request.files.get('profile_image')
         image_url = None
@@ -295,11 +327,6 @@ def signup():
 
         # Send the request to Cosmocloud API
         cosmo_url_create_user = 'https://free-ap-south-1.cosmocloud.io/development/api/testingusers'
-        headers = {
-            'Content-Type': 'application/json',
-            'projectId': PROJECT_ID,
-            'environmentId': ENVIRONMENT_ID
-        }
         
         response = requests.post(cosmo_url_create_user, json=user_data, headers=headers)
         
@@ -319,13 +346,14 @@ def signup():
                 'created_at': user_data['created_at']
             }
 
-            # Success message upon successful signup
+            print("Success message upon successful signup")
             return render_template('auth/latest-signup.html', success="Signup successful!", error=None)
         else:
             # Handle errors if the request to Cosmocloud fails
             error_message = response.json().get('message', 'An error occurred while saving the user data.')
             return render_template('auth/latest-signup.html', error=error_message, success=None)
-
+    
+    print("Outside SIGNUP POST")
     return render_template('auth/latest-signup.html', error=None, success=None)
 
 
@@ -728,7 +756,7 @@ def register_user_for_event(user_id, event_id, eve_details):
         print(f"Failed to fetch user data. Status code: {response.status_code}")
         return False
     
-@app.route('/register_event/<event_id>', methods=['POST'])
+@app.route('/register_event/<event_id>', methods=['GET', 'POST'])
 @login_required
 def register_event(event_id):
     user_id = session['user']['uid']  # Get the User ID from the session
@@ -740,17 +768,23 @@ def register_event(event_id):
 
     # Check if the user is already registered for the event
     if get_user_event(user_id, event_id):
-        flash('You are already registered for this event!', 'info')
-    else:
-        # Register the user for the event
-        if register_user_for_event(user_id, event_id, eve_details):
-            print('Successfully registered for the event!', 'success')
-            # flash('Successfully registered for the event!', 'success')
-        else:
-            print('Failed to register for the event. Please try again later.', 'error')
+        return render_template('events/details.html',  # Adjust your template path as needed
+                               event= eve_details,  # Pass event details
+                               error="You are already registered for this event.",
+                               success=None)
 
-    # Redirect the user back to the event details page
-    return redirect(url_for('event_detail', event_id=event_id))
+    # Register the user for the event
+    if register_user_for_event(user_id, event_id, eve_details):
+        return render_template('events/details.html',
+                               event= eve_details,  # Pass event details
+                               error=None,
+                               success="Successfully registered for the event!")
+    else:
+        return render_template('events/details.html',
+                               event= eve_details,  # Pass event details
+                               error="Failed to register for the event. Please try again later.",
+                               success=None)
+
 
 if __name__ == '__main__':
     app.jinja_env.filters['format_datetime'] = format_datetime
