@@ -429,14 +429,13 @@
 
       <div class="container-medium-713px blog-hero snipcss-bFtMO">
         <div data-w-id="cf573a1b-b40f-dbaa-55e6-498ccce2ed27" class="blog-newsletter-form-block w-form style-BbpRb" id="style-BbpRb">
-            <form id="text-form" name="text-form" data-name="text Form" method="get" class="blog-newsletter-form" data-wf-page-id="6112c014b1f02c27efeb85fb" 
-                  data-wf-element-id="cf573a1b-b40f-dbaa-55e6-498ccce2ed28" aria-label="text Form">
-                <input class="input blog-newsletter w-input" maxlength="256" name="text" data-name="text" 
-                       placeholder="Looking for an event? Search by name, venue, or date..." type="text" id="search-bar" required="" data-has-listeners="true">
-                <div class="button-primary-gradient blog-newsletter">
-                  <input type="submit"  data-wait="Please wait..." class="button-primary small w-button" value="Explore" onclick="handleSearch()" data-has-listeners="true">
-                </div>
-            </form>
+          <form id="text-form" name="text-form" method="get" class="blog-newsletter-form">
+            <input class="input blog-newsletter w-input" maxlength="256" name="text" placeholder="Looking for an event? Search by name, venue, or date..." type="text" id="search-bar" required>
+            <div class="button-primary-gradient blog-newsletter">
+                <button type="submit" class="button-primary small w-button">Explore</button>
+            </div>
+        </form>
+        
 
             
             <div class="success-message w-form-done" tabindex="-1" role="region" aria-label="Email Form success">
@@ -451,22 +450,29 @@
     <div id="events-container">
       
       {% include 'events/search-list.html' %}
-  </div> 
+    </div> 
       
 
     </main>
   
     <script>
-      function handleSearch() {
-          const searchQuery = document.getElementById('search-bar').value.trim();
-          if (searchQuery) {
-              window.location.href = `/search-events?query=${encodeURIComponent(searchQuery)}`;
-          }
+  document.getElementById('text-form').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+      handleSearch();
+  });
+
+  function handleSearch() {
+      console.log("in js function");
+      const searchQuery = document.getElementById('search-bar').value.trim();
+      if (searchQuery) {
+          window.location.href = `/search-events?query=${encodeURIComponent(searchQuery)}`;
       }
+  }
+
   </script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function() {
     let searchBox = document.querySelector('.blog-newsletter-form input[type="text"]');
     searchBox.style.backgroundColor = "#333";
     searchBox.style.color = "#fff";
