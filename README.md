@@ -3,7 +3,7 @@
 ![eventiq](https://github.com/user-attachments/assets/78b24131-0a5f-4b05-97b5-18051b7a6a9b)
 
 
-Event IQ is an AI-driven platform designed to help users discover, organize, and manage tech events tailored to their interests. It integrates a powerful backend, personalized recommendations, and automated event management, making it easy to navigate the tech event space.
+Event IQ is an AI-driven platform designed to help users discover, organize, and manage tech events tailored to their interests. It integrates a powerful backend, personalized recommendations, and automated event management, making it easy to navigate the event space.
 
 ## Working Video of the Project- Part-1: 
 ```https://drive.google.com/file/d/1Up5_DWnHYbKsibL2x26Ox5VPSsgyXzQX/view?usp=sharing```
