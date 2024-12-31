@@ -6,7 +6,7 @@
 Event IQ is an AI-driven platform designed to help users discover, organize, and manage tech events tailored to their interests. It integrates a powerful backend, personalized recommendations, and automated event management, making it easy to navigate the event space.
 
 ## Working Video of the Project- Part-1: 
-```https://drive.google.com/file/d/1Up5_DWnHYbKsibL2x26Ox5VPSsgyXzQX/view?usp=sharing```
+```NULL```
 ## Working Video of the Project- Part-2: 
 ```https://drive.google.com/file/d/1zBb3NBmD-hN37Ub2qAS9Zu_YUxplPxM5/view?usp=sharing```
 
